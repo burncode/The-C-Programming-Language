@@ -1,0 +1,123 @@
+;; Object Chapter1
+;; EDE project file.
+(ede-proj-project "Chapter1"
+  :name "Chapter1"
+  :file "Project.ede"
+  :targets (list 
+   (ede-proj-target-makefile-program "hello-world"
+    :name "hello-world"
+    :path ""
+    :source '("1-1.cpp")
+    )
+   (ede-proj-target-makefile-program "unknown-escape"
+    :name "unknown-escape"
+    :path ""
+    :source '("1-2.cpp")
+    )
+   (ede-proj-target-makefile-program "F2C-converter"
+    :name "F2C-converter"
+    :path ""
+    :source '("1-3.cpp")
+    )
+   (ede-proj-target-makefile-program "C2F-converter"
+    :name "C2F-converter"
+    :path ""
+    :source '("1-4.cpp")
+    )
+   (ede-proj-target-makefile-program "F2C-converter-desc"
+    :name "F2C-converter-desc"
+    :path ""
+    :source '("1-5.cpp")
+    )
+   (ede-proj-target-makefile-program "getchar-value"
+    :name "getchar-value"
+    :path ""
+    :source '("1-6.cpp")
+    )
+   (ede-proj-target-makefile-program "EOF-value"
+    :name "EOF-value"
+    :path ""
+    :source '("1-7.cpp")
+    )
+   (ede-proj-target-makefile-program "blank-count"
+    :name "blank-count"
+    :path ""
+    :source '("1-8.cpp")
+    )
+   (ede-proj-target-makefile-program "trim-blank"
+    :name "trim-blank"
+    :path ""
+    :source '("1-9.cpp")
+    )
+   (ede-proj-target-makefile-program "print-escape"
+    :name "print-escape"
+    :path ""
+    :source '("1-10.cpp")
+    )
+   (ede-proj-target-makefile-program "word-per-line"
+    :name "word-per-line"
+    :path ""
+    :source '("1-12.cpp")
+    )
+   (ede-proj-target-makefile-program "word-length"
+    :name "word-length"
+    :path ""
+    :source '("1-13.cpp")
+    )
+   (ede-proj-target-makefile-program "char-freq"
+    :name "char-freq"
+    :path ""
+    :source '("1-14.cpp")
+    )
+   (ede-proj-target-makefile-program "F2C-converter2"
+    :name "F2C-converter2"
+    :path ""
+    :source '("1-15.cpp")
+    )
+   (ede-proj-target-makefile-program "maxline"
+    :name "maxline"
+    :path ""
+    :source '("1-16.cpp")
+    )
+   (ede-proj-target-makefile-program "long-line"
+    :name "long-line"
+    :path ""
+    :source '("1-17.cpp")
+    )
+   (ede-proj-target-makefile-program "trim-line"
+    :name "trim-line"
+    :path ""
+    :source '("1-18.cpp")
+    )
+   (ede-proj-target-makefile-program "reverse-line"
+    :name "reverse-line"
+    :path ""
+    :source '("1-19.cpp")
+    )
+   (ede-proj-target-makefile-program "detab"
+    :name "detab"
+    :path ""
+    :source '("1-20.cpp")
+    )
+   (ede-proj-target-makefile-program "entab"
+    :name "entab"
+    :path ""
+    :source '("1-21.cpp")
+    )
+   (ede-proj-target-makefile-program "fold-line"
+    :name "fold-line"
+    :path ""
+    :source '("1-22.cpp")
+    )
+   (ede-proj-target-makefile-program "remove-comment"
+    :name "remove-comment"
+    :path ""
+    :source '("1-23.cpp")
+    )
+   (ede-proj-target-makefile-program "syntax-check"
+    :name "syntax-check"
+    :path ""
+    :source '("1-24.cpp")
+    )
+   )
+  )
