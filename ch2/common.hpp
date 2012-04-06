@@ -3,29 +3,34 @@
  * Author: bear         <jrjbear@gmail.com>                             **
  * Date: 2012--04--04                                                   **
  *                                                                      **
- * File: 1-5.cpp                                                        **
+ * File: common.hpp                                                     **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
  */
 
-#include <stdio.h>
 
-int main ()
+#ifndef _COMMON_HPP_
+#define _COMMON_HPP_
+
+int my_getline (char s[], int lim) 
 {
-    float fahr, celsius;
-    int lower, upper, step;
+    int c, i;
 
-    lower = 0;
-    upper = 300;
-    step = 20;
-
-    fahr = lower;
-    printf ("%3s %6s\n", "^F", "^C");
-    for (fahr = upper; fahr >= lower; fahr -= step) {
-        celsius = (5.0 / 9.0) * (fahr - 32);
-        printf ("%3.0f %6.1f\n", fahr, celsius);
+    // i < lim - 1 because we should leave at least
+    // one space for \0.
+    for (i = 0; i < lim - 1 
+         && (c = getchar ()) != EOF 
+         && c != '\n'; i++) {
+        s[i] = c;
     }
 
-    return 0;
+    s[i] = '\0';
+    if (c == EOF) {
+        return -1;
+    } else {
+        return i;
+    }
 }
+
+#endif // _COMMON_HPP_

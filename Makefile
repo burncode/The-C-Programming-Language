@@ -14,13 +14,18 @@ DISTDIR=$(top)Solutions-$(VERSION)
 
 
 
-all: Chapter1
+all: Chapter2 Chapter1
+
+.PHONY:Chapter2
+Chapter2:
+	$(MAKE) -C ch2
 
 .PHONY:Chapter1
 Chapter1:
 	$(MAKE) -C ch1
 
 tags: 
+	$(MAKE) -C ch2/ $(MFLAGS) $@
 	$(MAKE) -C ch1/ $(MFLAGS) $@
 
 .PHONY: dist
@@ -29,6 +34,7 @@ dist:
 	rm -rf $(DISTDIR)
 	mkdir $(DISTDIR)
 	cp $(ede_FILES) $(DISTDIR)
+	$(MAKE) -C ch2 $(MFLAGS) DISTDIR=$(DISTDIR)/ch2 dist
 	$(MAKE) -C ch1 $(MFLAGS) DISTDIR=$(DISTDIR)/ch1 dist
 	tar -cvzf $(DISTDIR).tar.gz $(DISTDIR)
 	rm -rf $(DISTDIR)

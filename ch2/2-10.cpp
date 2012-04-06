@@ -1,9 +1,9 @@
 /*************************************************************************
  *                                                                      **
  * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
+ * Date: 2012--04--06                                                   **
  *                                                                      **
- * File: 1-5.cpp                                                        **
+ * File: 2-10.cpp                                                       **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
@@ -11,20 +11,19 @@
 
 #include <stdio.h>
 
+int lower (int c)
+{ return (c >= 'A' && c <= 'Z')? c - 'A' + 'a': c; }
+
 int main ()
 {
-    float fahr, celsius;
-    int lower, upper, step;
+    char c;
+    while (scanf ("%c", &c) == 1) {
+        if (c == '\n') {
+            continue;
+        }
 
-    lower = 0;
-    upper = 300;
-    step = 20;
-
-    fahr = lower;
-    printf ("%3s %6s\n", "^F", "^C");
-    for (fahr = upper; fahr >= lower; fahr -= step) {
-        celsius = (5.0 / 9.0) * (fahr - 32);
-        printf ("%3.0f %6.1f\n", fahr, celsius);
+        printf ("lower (%c) is %c\n", c, 
+                lower (c));
     }
 
     return 0;
