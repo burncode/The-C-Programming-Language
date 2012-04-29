@@ -12,7 +12,6 @@
 #include <stdio.h>
 
 int bitcount (unsigned long x);
-void unit_test(unsigned long x);
 
 int main ()
 {
@@ -25,12 +24,6 @@ int main ()
     }
     
     return 0;
-}
-
-void unit_test(unsigned long x)
-{
-    printf("x = %#lx\n", x);
-    printf("x has %d bits\n\n", bitcount(x));
 }
 
 int bitcount (unsigned long x)

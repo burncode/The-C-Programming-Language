@@ -33,18 +33,6 @@ int main ()
     return 0;
 }
 
-void unit_test(unsigned long x, int n)
-{
-    printf("x = %#lx\n", x);
-    printf("After rightrot(x, %d): ", n);
-
-    if(rightrot(&x, n) < 0) {
-        printf("Invalid parameter\n\n");
-    } else {
-        printf("%#lx\n\n", x);
-    }
-}
-
 int rightrot (unsigned long* x, int n)
 {
     if (n < 0) {
