@@ -29,7 +29,7 @@ VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/ch3
 top_builddir = ..
 
-DEP_FILES=.deps/3-1.P .deps/common.P .deps/3-2.P .deps/common.P .deps/3-3.P .deps/common.P .deps/3-4.P .deps/common.P .deps/3-5.P .deps/common.P .deps/3-6.P .deps/common.P
+DEP_FILES=.deps/3-1.P .deps/3-2.P .deps/3-3.P .deps/3-4.P .deps/3-5.P .deps/3-6.P
 
 all: binary-search escape-unescape expand itoa itob format-itoa
 

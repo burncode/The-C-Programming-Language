@@ -13,6 +13,8 @@
 #ifndef _COMMON_HPP_
 #define _COMMON_HPP_
 
+#include <stdio.h>
+
 int my_getline (char s[], int lim) 
 {
     int c, i;

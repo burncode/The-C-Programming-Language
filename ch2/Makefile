@@ -37,7 +37,7 @@ VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/ch2
 top_builddir = ..
 
-DEP_FILES=.deps/2-1.P .deps/common.P .deps/2-2.P .deps/common.P .deps/2-3.P .deps/common.P .deps/2-4.P .deps/common.P .deps/2-5.P .deps/common.P .deps/2-6.P .deps/common.P .deps/2-7.P .deps/common.P .deps/2-8.P .deps/common.P .deps/2-9.P .deps/common.P .deps/2-10.P .deps/common.P
+DEP_FILES=.deps/2-1.P .deps/2-2.P .deps/2-3.P .deps/2-4.P .deps/2-5.P .deps/2-6.P .deps/2-7.P .deps/2-8.P .deps/2-9.P .deps/2-10.P
 
 all: print-limit max-line htoi squeeze any setbits invert rightrot bit-count lower
 

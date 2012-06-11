@@ -8,37 +8,31 @@
     :name "binary-search"
     :path ""
     :source '("3-1.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "escape-unescape"
     :name "escape-unescape"
     :path ""
     :source '("3-2.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "expand"
     :name "expand"
     :path ""
     :source '("3-3.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "itoa"
     :name "itoa"
     :path ""
     :source '("3-4.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "itob"
     :name "itob"
     :path ""
     :source '("3-5.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "format-itoa"
     :name "format-itoa"
     :path ""
     :source '("3-6.cpp")
-    :auxsource '("common.hpp")
     )
    )
   )

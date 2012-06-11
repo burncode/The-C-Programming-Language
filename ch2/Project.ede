@@ -8,61 +8,51 @@
     :name "print-limit"
     :path ""
     :source '("2-1.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "max-line"
     :name "max-line"
     :path ""
     :source '("2-2.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "htoi"
     :name "htoi"
     :path ""
     :source '("2-3.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "squeeze"
     :name "squeeze"
     :path ""
     :source '("2-4.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "any"
     :name "any"
     :path ""
     :source '("2-5.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "setbits"
     :name "setbits"
     :path ""
     :source '("2-6.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "invert"
     :name "invert"
     :path ""
     :source '("2-7.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "rightrot"
     :name "rightrot"
     :path ""
     :source '("2-8.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "bit-count"
     :name "bit-count"
     :path ""
     :source '("2-9.cpp")
-    :auxsource '("common.hpp")
     )
    (ede-proj-target-makefile-program "lower"
     :name "lower"
     :path ""
     :source '("2-10.cpp")
-    :auxsource '("common.hpp")
     )
    )
   )
