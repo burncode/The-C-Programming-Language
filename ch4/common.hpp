@@ -37,4 +37,5 @@ int my_getline (char s[], int lim)
     }
 }
 
+
 #endif // _COMMON_HPP_

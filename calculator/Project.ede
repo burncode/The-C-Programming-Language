@@ -1,0 +1,13 @@
+;; Object asdf
+;; EDE project file.
+(ede-proj-project "asdf"
+  :name "asdf"
+  :file "Project.ede"
+  :targets (list 
+   (ede-proj-target-makefile-program "calc"
+    :name "calc"
+    :path ""
+    :source '("main.cpp" "getop.cpp" "stack.cpp")
+    )
+   )
+  )
