@@ -49,12 +49,11 @@ int getop (char s[])
 
         // unget a character.
         pos--;
+        s[i] = '\0';
 
         if (i > 1) {
-            s[i] = '\0';
             return MATH;
         } else {
-            s[1] = '\0';
             if (isupper (s[0])) {
                 return ALPHA;
             } else {
@@ -62,16 +61,26 @@ int getop (char s[])
             }
         }
     }
-        
+
+    // These characters can be the leading character
+    // of a number.     
     if (!isdigit (c) && c != '.' 
         && c != '-' && c != '+') {
         return c;
     }
+   
+    // '+' and '-' should be followed by a digit
+    // to be a number or be followed by a '.'.
+    // For example, -.123.
+    if ((c == '-' || c == '+')
+        && !isdigit (line[pos])
+        && line[pos] != '.') {
+        return c;
+    }
 
-    // These characters can be the leading character
-    // of a number.
-    if ((c == '.' || c == '-' || c == '+')
-        && !isdigit (line[pos])) {
+    // '.' should be followed by a digit
+    // to be a pure digit number.
+    if (c == '.' && !isdigit (line[pos])) {
         return c;
     }
 
@@ -79,11 +88,24 @@ int getop (char s[])
         s[i++] = c;
         c = line[pos++];
     } while (isdigit (c));
+     
+    if (c == '.') {
+        // '.' should be followed by a digit
+        // to be a digit number.
+        if (!isdigit (line[pos])) {
+            // Unget the '.'.
+            pos--;
+            s[i] = '\0';
 
-    // Deal with special case that contains multiple '.'
-    // in elements.
-    // For example, .123.456.
-    if (c == '.' && s[0] != '.') {
+            if (!isdigit (s[0]) && i <= 1) {
+                // Case such as +.abc.
+                return s[0];
+            } else {
+                // Case such as -123..
+                return NUMBER;
+            }
+        }
+
         do {
             s[i++] = c;
             c = line[pos++];

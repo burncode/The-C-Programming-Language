@@ -1,7 +1,7 @@
 ;; Object asdf
 ;; EDE project file.
 (ede-proj-project "asdf"
-  :name "asdf"
+  :name "Caculator"
   :file "Project.ede"
   :targets (list 
    (ede-proj-target-makefile-program "calc"

@@ -166,7 +166,7 @@ int main ()
             continue;
 
         default:
-            printf ("Unknown command: %s\n", s);
+            printf ("Unknown command: %c\n", type);
             break;
         }
 
