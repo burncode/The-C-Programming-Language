@@ -38,7 +38,7 @@ int main ()
 
     printf ("Welcome to Simple Caculator!\n");
     printf ("This caculator uses reverse Polish notation.\n");
-    printf ("Support point numbers and negative numbers.\n");
+    printf ("Support digit numbers and negative numbers.\n");
     printf ("Note that spaces are needed to separate elements.\n\n");
 
     printf ("Arithmetic commands: \'+\', \'-\', \'*\', "

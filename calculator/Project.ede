@@ -7,7 +7,7 @@
    (ede-proj-target-makefile-program "calc"
     :name "calc"
     :path ""
-    :source '("main.cpp" "getop.cpp" "stack.cpp")
+    :source '("main.cpp" "getop.cpp" "stack.cpp" "utils.cpp")
     )
    )
   )

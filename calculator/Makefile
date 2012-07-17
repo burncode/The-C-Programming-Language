@@ -9,8 +9,8 @@
 top=../
 ede_FILES=Project.ede Makefile
 
-calc_SOURCES=main.cpp getop.cpp stack.cpp
-calc_OBJ= main.o getop.o stack.o
+calc_SOURCES=main.cpp getop.cpp stack.cpp utils.cpp
+calc_OBJ= main.o getop.o stack.o utils.o
 CXX= g++
 CXX_COMPILE=$(CXX) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
 CXX_DEPENDENCIES=-Wp,-MD,.deps/$(*F).P
@@ -19,7 +19,7 @@ VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/calculator
 top_builddir = ..
 
-DEP_FILES=.deps/main.P .deps/getop.P .deps/stack.P
+DEP_FILES=.deps/main.P .deps/getop.P .deps/stack.P .deps/utils.P
 
 all: calc
 

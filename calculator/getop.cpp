@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "calc.h"
-#include "common.hpp"
 
 #define MAXLINE 1024
 
