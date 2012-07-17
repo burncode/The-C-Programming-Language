@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "common.hpp"
+#include "utils.h"
 
 #define SIZE 256
 #define MAXLINE 1024

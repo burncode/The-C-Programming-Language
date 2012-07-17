@@ -17,12 +17,12 @@ CXX_DEPENDENCIES=-Wp,-MD,.deps/$(*F).P
 CXX_LINK=$(CXX) $(CFLAGS) $(LDFLAGS) -L.
 max-line_SOURCES=2-2.cpp
 max-line_OBJ= 2-2.o
-htoi_SOURCES=2-3.cpp
-htoi_OBJ= 2-3.o
-squeeze_SOURCES=2-4.cpp
-squeeze_OBJ= 2-4.o
-any_SOURCES=2-5.cpp
-any_OBJ= 2-5.o
+htoi_SOURCES=2-3.cpp utils.cpp
+htoi_OBJ= 2-3.o utils.o
+squeeze_SOURCES=2-4.cpp utils.cpp
+squeeze_OBJ= 2-4.o utils.o
+any_SOURCES=2-5.cpp utils.cpp
+any_OBJ= 2-5.o utils.o
 setbits_SOURCES=2-6.cpp
 setbits_OBJ= 2-6.o
 invert_SOURCES=2-7.cpp
@@ -37,7 +37,7 @@ VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/ch2
 top_builddir = ..
 
-DEP_FILES=.deps/2-1.P .deps/2-2.P .deps/2-3.P .deps/2-4.P .deps/2-5.P .deps/2-6.P .deps/2-7.P .deps/2-8.P .deps/2-9.P .deps/2-10.P
+DEP_FILES=.deps/2-1.P .deps/2-2.P .deps/2-3.P .deps/utils.P .deps/2-4.P .deps/utils.P .deps/2-5.P .deps/utils.P .deps/2-6.P .deps/2-7.P .deps/2-8.P .deps/2-9.P .deps/2-10.P
 
 all: print-limit max-line htoi squeeze any setbits invert rightrot bit-count lower
 
