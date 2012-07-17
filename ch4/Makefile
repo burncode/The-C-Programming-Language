@@ -9,14 +9,14 @@
 top=../
 ede_FILES=Project.ede Makefile
 
-strrindex_SOURCES=4-1.cpp
-strrindex_OBJ= 4-1.o
+strrindex_SOURCES=4-1.cpp utils.cpp
+strrindex_OBJ= 4-1.o utils.o
 CXX= g++
 CXX_COMPILE=$(CXX) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
 CXX_DEPENDENCIES=-Wp,-MD,.deps/$(*F).P
 CXX_LINK=$(CXX) $(CFLAGS) $(LDFLAGS) -L.
-atof_SOURCES=4-2.cpp
-atof_OBJ= 4-2.o
+atof_SOURCES=4-2.cpp utils.cpp
+atof_OBJ= 4-2.o utils.o
 ungets_SOURCES=4-7.cpp
 ungets_OBJ= 4-7.o
 unget-c_SOURCES=4-8.cpp
@@ -27,15 +27,15 @@ getop_SOURCES=4-11.cpp
 getop_OBJ= 4-11.o
 itoa_SOURCES=4-12.cpp
 itoa_OBJ= 4-12.o
-reverse_SOURCES=4-13.cpp
-reverse_OBJ= 4-13.o
+reverse_SOURCES=4-13.cpp utils.cpp
+reverse_OBJ= 4-13.o utils.o
 swap_SOURCES=4-14.cpp
 swap_OBJ= 4-14.o
 VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/ch4
 top_builddir = ..
 
-DEP_FILES=.deps/4-1.P .deps/4-2.P .deps/4-7.P .deps/4-8.P .deps/4-9.P .deps/4-11.P .deps/4-12.P .deps/4-13.P .deps/4-14.P
+DEP_FILES=.deps/4-1.P .deps/utils.P .deps/4-2.P .deps/utils.P .deps/4-7.P .deps/4-8.P .deps/4-9.P .deps/4-11.P .deps/4-12.P .deps/4-13.P .deps/utils.P .deps/4-14.P
 
 all: strrindex atof ungets unget-c unget-EOF getop itoa reverse swap
 

@@ -7,12 +7,12 @@
    (ede-proj-target-makefile-program "strrindex"
     :name "strrindex"
     :path ""
-    :source '("4-1.cpp")
+    :source '("4-1.cpp" "utils.cpp")
     )
    (ede-proj-target-makefile-program "atof"
     :name "atof"
     :path ""
-    :source '("4-2.cpp")
+    :source '("4-2.cpp" "utils.cpp")
     )
    (ede-proj-target-makefile-program "ungets"
     :name "ungets"
@@ -42,7 +42,7 @@
    (ede-proj-target-makefile-program "reverse"
     :name "reverse"
     :path ""
-    :source '("4-13.cpp")
+    :source '("4-13.cpp" "utils.cpp")
     )
    (ede-proj-target-makefile-program "swap"
     :name "swap"

@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
-#include "common.hpp"
+#include "utils.h"
 
 #define BUFSIZE 1024
 

@@ -3,15 +3,12 @@
  * Author: bear         <jrjbear@gmail.com>                             **
  * Date: 2012--04--04                                                   **
  *                                                                      **
- * File: common.hpp                                                     **
+ * File: utils.cpp                                                      **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
  */
 
-
-#ifndef _COMMON_HPP_
-#define _COMMON_HPP_
 
 #include <stdio.h>
 
@@ -36,6 +33,3 @@ int my_getline (char s[], int lim)
         return i;
     }
 }
-
-
-#endif // _COMMON_HPP_
