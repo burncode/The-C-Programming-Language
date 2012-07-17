@@ -3,15 +3,12 @@
  * Author: bear         <jrjbear@gmail.com>                             **
  * Date: 2012--04--04                                                   **
  *                                                                      **
- * File: common.hpp                                                     **
+ * File: utils.cpp                                                      **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
  */
 
-
-#ifndef _COMMON_HPP_
-#define _COMMON_HPP_
 
 #include <stdio.h>
 #include <string.h>
@@ -49,7 +46,3 @@ void reverse (char s[])
         s[j] = c;
     }
 }
-
-
-
-#endif // _COMMON_HPP_

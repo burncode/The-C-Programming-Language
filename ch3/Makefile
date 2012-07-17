@@ -15,21 +15,21 @@ CXX= g++
 CXX_COMPILE=$(CXX) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
 CXX_DEPENDENCIES=-Wp,-MD,.deps/$(*F).P
 CXX_LINK=$(CXX) $(CFLAGS) $(LDFLAGS) -L.
-escape-unescape_SOURCES=3-2.cpp
-escape-unescape_OBJ= 3-2.o
-expand_SOURCES=3-3.cpp
-expand_OBJ= 3-3.o
-itoa_SOURCES=3-4.cpp
-itoa_OBJ= 3-4.o
-itob_SOURCES=3-5.cpp
-itob_OBJ= 3-5.o
-format-itoa_SOURCES=3-6.cpp
-format-itoa_OBJ= 3-6.o
+escape-unescape_SOURCES=3-2.cpp utils.cpp
+escape-unescape_OBJ= 3-2.o utils.o
+expand_SOURCES=3-3.cpp utils.cpp
+expand_OBJ= 3-3.o utils.o
+itoa_SOURCES=3-4.cpp utils.cpp
+itoa_OBJ= 3-4.o utils.o
+itob_SOURCES=3-5.cpp utils.cpp
+itob_OBJ= 3-5.o utils.o
+format-itoa_SOURCES=3-6.cpp utils.cpp
+format-itoa_OBJ= 3-6.o utils.o
 VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/ch3
 top_builddir = ..
 
-DEP_FILES=.deps/3-1.P .deps/3-2.P .deps/3-3.P .deps/3-4.P .deps/3-5.P .deps/3-6.P
+DEP_FILES=.deps/3-1.P .deps/3-2.P .deps/utils.P .deps/3-3.P .deps/utils.P .deps/3-4.P .deps/utils.P .deps/3-5.P .deps/utils.P .deps/3-6.P .deps/utils.P
 
 all: binary-search escape-unescape expand itoa itob format-itoa
 

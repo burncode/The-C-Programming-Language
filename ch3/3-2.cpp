@@ -10,7 +10,7 @@
  */
 
 #include <stdio.h>
-#include "common.hpp"
+#include "utils.h"
 
 #define BUFSIZE 1024
 
