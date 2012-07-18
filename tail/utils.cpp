@@ -1,44 +1,35 @@
 /*************************************************************************
  *                                                                      **
  * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
+ * Date: 2012--04--04                                                   **
  *                                                                      **
- * File: calc.h                                                         **
+ * File: utils.cpp                                                      **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
  */
 
-
-#ifndef _CALC_H_
-#define _CALC_H_
-
-#define NUMBER '0'
-#define ALPHA 'A'
-#define MATH 'm'
-#define VAL 'v'
-
-// stack.cpp
-void push (double f);
-double pop ();
-double top ();
-void dup ();
-void swap ();
-void clear ();
-
-// getop.cpp
-int getop (char s[]);
-
-
-
-// utils.cpp
+#include <stdio.h>
+#include <string.h>
 
 // Note that s contains '\n' and this function
 // returns the number of characters including '\n'.
-int my_getline (char s[], int lim);
+int my_getline (char s[], int lim) 
+{
+    int c, i;
 
+    // i < lim - 1 because we should leave at least
+    // one space for \0.
+    for (i = 0; i < lim - 1 
+         && (c = getchar ()) != EOF 
+         && c != '\n'; i++) {
+        s[i] = c;
+    }
 
-#endif // _CALC_H_
+    if (c == '\n' && i < lim - 1) {
+        s[i++] = c;
+    }
+    s[i] = '\0';
 
-
-
+    return i;
+}

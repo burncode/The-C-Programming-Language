@@ -3,20 +3,19 @@
  * Author: bear         <jrjbear@gmail.com>                             **
  * Date: 2012--06--16                                                   **
  *                                                                      **
- * File: calc.h                                                         **
+ * File: expr.h                                                         **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
  */
 
 
-#ifndef _CALC_H_
-#define _CALC_H_
+#ifndef _EXPR_H_
+#define _EXPR_H_
 
 #define NUMBER '0'
-#define ALPHA 'A'
 #define MATH 'm'
-#define VAL 'v'
+#define UNKNOWN '\0'
 
 // stack.cpp
 void push (double f);
@@ -30,15 +29,7 @@ void clear ();
 int getop (char s[]);
 
 
-
-// utils.cpp
-
-// Note that s contains '\n' and this function
-// returns the number of characters including '\n'.
-int my_getline (char s[], int lim);
-
-
-#endif // _CALC_H_
+#endif // _EXPR_H_
 
 
 

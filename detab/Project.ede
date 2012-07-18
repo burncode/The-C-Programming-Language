@@ -1,0 +1,13 @@
+;; Object Detab
+;; EDE project file.
+(ede-proj-project "Detab"
+  :name "Detab"
+  :file "Project.ede"
+  :targets (list 
+   (ede-proj-target-makefile-program "detab"
+    :name "detab"
+    :path ""
+    :source '("main.cpp")
+    )
+   )
+  )

@@ -1,35 +1,17 @@
 /*************************************************************************
  *                                                                      **
  * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
+ * Date: 2012--07--18                                                   **
  *                                                                      **
- * File: calc.h                                                         **
+ * File: tail.h                                                         **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
  */
 
 
-#ifndef _CALC_H_
-#define _CALC_H_
-
-#define NUMBER '0'
-#define ALPHA 'A'
-#define MATH 'm'
-#define VAL 'v'
-
-// stack.cpp
-void push (double f);
-double pop ();
-double top ();
-void dup ();
-void swap ();
-void clear ();
-
-// getop.cpp
-int getop (char s[]);
-
-
+#ifndef _TAIL_H_
+#define _TAIL_H_
 
 // utils.cpp
 
@@ -38,7 +20,16 @@ int getop (char s[]);
 int my_getline (char s[], int lim);
 
 
-#endif // _CALC_H_
 
+// char_pool.cpp
 
+// Add chunk ptr to free list.
+// Note that the free list is ordered by address of each chunk
+// and chunks can merge into bigger one if they are contiguous.
+void free_mem (void* ptr);
 
+// Return a pointer the a memory chunk in this pool.
+// This function will check free list first.
+void* alloc_mem (int size);
+
+#endif // _TAIL_H_

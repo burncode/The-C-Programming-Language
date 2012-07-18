@@ -1,0 +1,13 @@
+;; Object Expr
+;; EDE project file.
+(ede-proj-project "Expr"
+  :name "Expr"
+  :file "Project.ede"
+  :targets (list 
+   (ede-proj-target-makefile-program "expr"
+    :name "expr"
+    :path ""
+    :source '("main.cpp" "getop.cpp" "stack.cpp")
+    )
+   )
+  )
