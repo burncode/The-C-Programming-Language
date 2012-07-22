@@ -9,8 +9,8 @@
 top=../
 ede_FILES=Project.ede Makefile
 
-detab_SOURCES=main.cpp
-detab_OBJ= main.o
+detab_SOURCES=main.cpp getop.cpp utils.cpp detab.cpp
+detab_OBJ= main.o getop.o utils.o detab.o
 CXX= g++
 CXX_COMPILE=$(CXX) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
 CXX_DEPENDENCIES=-Wp,-MD,.deps/$(*F).P
@@ -19,7 +19,7 @@ VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/detab
 top_builddir = ..
 
-DEP_FILES=.deps/main.P
+DEP_FILES=.deps/main.P .deps/getop.P .deps/utils.P .deps/detab.P
 
 all: detab
 

@@ -7,7 +7,7 @@
    (ede-proj-target-makefile-program "detab"
     :name "detab"
     :path ""
-    :source '("main.cpp")
+    :source '("main.cpp" "getop.cpp" "utils.cpp" "detab.cpp")
     )
    )
   )

@@ -9,8 +9,8 @@
 top=../
 ede_FILES=Project.ede Makefile
 
-tail_SOURCES=main.cpp char_pool.cpp utils.cpp
-tail_OBJ= main.o char_pool.o utils.o
+tail_SOURCES=main.cpp char_pool.cpp utils.cpp getop.cpp
+tail_OBJ= main.o char_pool.o utils.o getop.o
 CXX= g++
 CXX_COMPILE=$(CXX) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
 CXX_DEPENDENCIES=-Wp,-MD,.deps/$(*F).P
@@ -19,7 +19,7 @@ VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/tail
 top_builddir = ..
 
-DEP_FILES=.deps/main.P .deps/char_pool.P .deps/utils.P
+DEP_FILES=.deps/main.P .deps/char_pool.P .deps/utils.P .deps/getop.P
 
 all: tail
 

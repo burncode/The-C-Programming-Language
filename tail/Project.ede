@@ -7,7 +7,7 @@
    (ede-proj-target-makefile-program "tail"
     :name "tail"
     :path ""
-    :source '("main.cpp" "char_pool.cpp" "utils.cpp")
+    :source '("main.cpp" "char_pool.cpp" "utils.cpp" "getop.cpp")
     )
    )
   )

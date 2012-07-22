@@ -17,13 +17,11 @@
 #define DFTLINES 10
 #define MAXLINE 1024
 
-void print_help ();
-
 int main (int argc, char* argv[])
 {
     // lines is a ring buffer that holds pointers to
     // the last nlines of the input.
-    int nlines, pos, len;
+    int nlines, pos, len, op;
     char buf[MAXLINE];
     char* ptr;
     char** lines;
@@ -36,13 +34,13 @@ int main (int argc, char* argv[])
         return -1;
 
     } else if (argc == 2) {
-        char* s = *++argv;
-        if (s[0] != '-') {
+        op = getop (*++argv, buf);
+        if (op != NUMBER) {
             print_help ();
             return -1;
         }
 
-        nlines = atoi (++s);
+        nlines = atoi (buf);
     }
 
     lines = new char*[nlines];
@@ -74,5 +72,3 @@ int main (int argc, char* argv[])
     return 0;
 }
 
-void print_help ()
-{ printf ("Usage: tail [-n]\n."); }

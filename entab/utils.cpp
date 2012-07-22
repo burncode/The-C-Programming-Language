@@ -1,7 +1,7 @@
 /*************************************************************************
  *                                                                      **
  * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
+ * Date: 2012--07--22                                                   **
  *                                                                      **
  * File: utils.cpp                                                      **
  * Description:                                                         **
@@ -10,29 +10,28 @@
  */
 
 #include <stdio.h>
-#include <string.h>
+#include "entab.h"
 
-// Note that s contains '\n' and this function
-// returns the number of characters including '\n'.
-int my_getline (char s[], int lim) 
+int find_next_stop (int i, char tab_flags[]) 
 {
-    int c, i;
-
-    // i < lim - 1 because we should leave at least
-    // one space for \0.
-    for (i = 0; i < lim - 1 
-         && (c = getchar ()) != EOF 
-         && c != '\n'; i++) {
-        s[i] = c;
+    for (; i < MAXSIZE; ++i) {
+        if (tab_flags[i] == YES) {
+            return i;
+        }
     }
-
-    if (c == '\n' && i < lim - 1) {
-        s[i++] = c;
-    }
-    s[i] = '\0';
-
-    return i;
+    
+    return -1;
 }
 
 void print_help ()
-{ printf ("Usage: tail [-n]\n."); }
+{
+    printf ("Usage: entab [-begin] [+inc].\n");
+    printf ("       entab [stop...].\n");
+    printf ("Note that 2 modes above cannot be specified ");
+    printf ("at the same time.\n");
+    printf ("If no arguments are specified, ");
+    printf ("the default mode is inc-mode with ");
+    printf ("begin = 0 and inc = 8.\n");
+}
+
+
