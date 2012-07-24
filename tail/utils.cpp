@@ -35,4 +35,4 @@ int my_getline (char s[], int lim)
 }
 
 void print_help ()
-{ printf ("Usage: tail [-n]\n."); }
+{ printf ("Usage: tail [-n].\n"); }

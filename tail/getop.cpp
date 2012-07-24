@@ -15,6 +15,9 @@
 
 int getop (const char* arg, char* s)
 {
+    bool has_digit;
+
+    has_digit = false;
     if (*arg != '-') {
         return UNKNOWN;
     }
@@ -22,9 +25,10 @@ int getop (const char* arg, char* s)
     ++arg;
     while (isdigit (*arg)) {
         *s++ = *arg++;
+        has_digit = true;
     }
     *s = '\0';
     
-    return (*arg == '\0'? NUMBER: UNKNOWN);
+    return (*arg == '\0' && has_digit? NUMBER: UNKNOWN);
 }
 
