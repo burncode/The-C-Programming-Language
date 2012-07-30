@@ -59,8 +59,8 @@ int main ()
         return 0;
     }
 
-    // Get the percentage of count[j] to max, and then
-    // decide how many * should be displayed.
+    // Get the percentage of `count[j]' to `max', and then
+    // decide how many '*' should be displayed.
     for (i = MAXVLST; i > 0; i--) {
         for (j = 0; j < MAXWORD; j++) {
             if ((count[j] * MAXVLST + max - 1) / max 

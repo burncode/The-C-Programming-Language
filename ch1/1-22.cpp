@@ -14,16 +14,14 @@
 #define THRESHOLD 80
 #define NUM 8
 
-// Output buf with len long starting at pos.
-// If the buffer exceeds THRESHOLD, it will
-// be fold.
+// Output `buf' with `len' long starting at `pos'.
+// If the buffer exceeds `THRESHOLD', it will be fold.
 int output (int pos, char buf[], int len);
 
 int main () 
 {
-    // i marks the point of the next character,
-    // starts from 1.
-    // len is the length of temp.
+    // `i' marks the point of the next character, starts from 1.
+    // `len' is the length of `temp'.
     int c, i, len;
     char temp[THRESHOLD + 1];
 
@@ -32,8 +30,7 @@ int main ()
     while ((c = getchar ()) != EOF) {
         if (c == ' ' || c == '\t' || c == '\n') {
             // We come across a blank character,
-            // first check if we have former buffer
-            // to output.
+            // first check if we have former buffer to output.
             i = output (i, temp, len);
             len = 0;
 
@@ -64,9 +61,8 @@ int main ()
             }
 
         } else {
-            // Stores c in a buffer, so that
-            // we can ouput this when we encounter
-            // a blank character.
+            // Stores `c' in a buffer, so that
+            // we can ouput this when we encounter a blank character.
             temp[len++] = c;
             if (len >= THRESHOLD) {
                 // Buffer has already overflowed.

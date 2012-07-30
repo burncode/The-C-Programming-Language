@@ -26,7 +26,7 @@ int main ()
                 state = NEWLINE;
             }
 
-            // state == NEWLINE here, which means
+            // `state == NEWLINE' here, which means
             // we do not output empty lines when
             // reading successive blanks.
         } else {

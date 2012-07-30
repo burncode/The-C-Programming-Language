@@ -66,8 +66,8 @@ void enter_quotes (char c)
 {
     char d, e;
 
-    // d marks the current character.
-    // e marks the last character.
+    // `d' marks the current character.
+    // `e' marks the last character.
     e = 0;
     while ((d = getchar ()) != EOF) {
         putchar (d);

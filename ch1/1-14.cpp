@@ -25,7 +25,7 @@ int main ()
     }
 
     // Count times of characters whose value
-    // is less than MAXCHAR.
+    // is less than `MAXCHAR'.
     while ((c = getchar ()) != EOF) {
         if (c < MAXCHAR) {
             ++count[c];
@@ -52,8 +52,8 @@ int main ()
             printf ("%5d,%5c,%5d: ", i, ' ', count[i]);
         }
 
-        // Get the percentage of count[i] to max, and then
-        // decide how many * should be displayed.
+        // Get the percentage of `count[i]' to `max', and then
+        // decide how many '*' should be displayed.
         for (len = (MAXHLST * count[i] + max - 1) / max; 
              len > 0; len--) {
             printf ("*");

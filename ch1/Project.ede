@@ -77,12 +77,12 @@
    (ede-proj-target-makefile-program "maxline"
     :name "maxline"
     :path ""
-    :source '("1-16.cpp")
+    :source '("1-16.cpp" "utils.cpp")
     )
    (ede-proj-target-makefile-program "long-line"
     :name "long-line"
     :path ""
-    :source '("1-17.cpp")
+    :source '("1-17.cpp" "utils.cpp")
     )
    (ede-proj-target-makefile-program "trim-line"
     :name "trim-line"
@@ -92,7 +92,7 @@
    (ede-proj-target-makefile-program "reverse-line"
     :name "reverse-line"
     :path ""
-    :source '("1-19.cpp")
+    :source '("1-19.cpp" "utils.cpp")
     )
    (ede-proj-target-makefile-program "detab"
     :name "detab"

@@ -41,14 +41,14 @@ char-freq_SOURCES=1-14.cpp
 char-freq_OBJ= 1-14.o
 F2C-converter2_SOURCES=1-15.cpp
 F2C-converter2_OBJ= 1-15.o
-maxline_SOURCES=1-16.cpp
-maxline_OBJ= 1-16.o
-long-line_SOURCES=1-17.cpp
-long-line_OBJ= 1-17.o
+maxline_SOURCES=1-16.cpp utils.cpp
+maxline_OBJ= 1-16.o utils.o
+long-line_SOURCES=1-17.cpp utils.cpp
+long-line_OBJ= 1-17.o utils.o
 trim-line_SOURCES=1-18.cpp
 trim-line_OBJ= 1-18.o
-reverse-line_SOURCES=1-19.cpp
-reverse-line_OBJ= 1-19.o
+reverse-line_SOURCES=1-19.cpp utils.cpp
+reverse-line_OBJ= 1-19.o utils.o
 detab_SOURCES=1-20.cpp
 detab_OBJ= 1-20.o
 entab_SOURCES=1-21.cpp
@@ -63,7 +63,7 @@ VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/ch1
 top_builddir = ..
 
-DEP_FILES=.deps/1-1.P .deps/1-2.P .deps/1-3.P .deps/1-4.P .deps/1-5.P .deps/1-6.P .deps/1-7.P .deps/1-8.P .deps/1-9.P .deps/1-10.P .deps/1-12.P .deps/1-13.P .deps/1-14.P .deps/1-15.P .deps/1-16.P .deps/1-17.P .deps/1-18.P .deps/1-19.P .deps/1-20.P .deps/1-21.P .deps/1-22.P .deps/1-23.P .deps/1-24.P
+DEP_FILES=.deps/1-1.P .deps/1-2.P .deps/1-3.P .deps/1-4.P .deps/1-5.P .deps/1-6.P .deps/1-7.P .deps/1-8.P .deps/1-9.P .deps/1-10.P .deps/1-12.P .deps/1-13.P .deps/1-14.P .deps/1-15.P .deps/1-16.P .deps/utils.P .deps/1-17.P .deps/utils.P .deps/1-18.P .deps/1-19.P .deps/utils.P .deps/1-20.P .deps/1-21.P .deps/1-22.P .deps/1-23.P .deps/1-24.P
 
 all: hello-world unknown-escape F2C-converter C2F-converter F2C-converter-desc getchar-value EOF-value blank-count trim-blank print-escape word-per-line word-length char-freq F2C-converter2 maxline long-line trim-line reverse-line detab entab fold-line remove-comment syntax-check
 
