@@ -1,0 +1,13 @@
+;; Object Sort
+;; EDE project file.
+(ede-proj-project "Sort"
+  :name "Sort"
+  :file "Project.ede"
+  :targets (list 
+   (ede-proj-target-makefile-program "sort"
+    :name "sort"
+    :path ""
+    :source '("main.cpp" "char_pool.cpp" "getop.cpp" "qsort.cpp" "utils.cpp" "compare.cpp")
+    )
+   )
+  )
