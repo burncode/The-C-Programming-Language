@@ -1,44 +1,22 @@
 /*************************************************************************
  *                                                                      **
  * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
+ * Date: 2012--07--17                                                   **
  *                                                                      **
- * File: calc.h                                                         **
+ * File: utils.h                                                        **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
  */
 
 
-#ifndef _CALC_H_
-#define _CALC_H_
+#ifndef _UTILS_H_
+#define _UTILS_H_
 
-#define NUMBER '0'
-#define ALPHA 'A'
-#define MATH 'm'
-#define VAL 'v'
-
-// stack.cpp
-void push (double f);
-double pop ();
-double top ();
-void dup ();
-void swap ();
-void clear ();
-
-// getop.cpp
-int getop (char s[]);
-
-
-
-// utils.cpp
-
-// Note that `s' contains '\n' and this function
-// returns the number of characters including '\n'.
+// Note that '\n' is removed in `s' and this function
+// returns the number of the remaining characters.
 int my_getline (char s[], int lim);
 
+void reverse (char s[]);
 
-#endif // _CALC_H_
-
-
-
+#endif // _UTILS_H_

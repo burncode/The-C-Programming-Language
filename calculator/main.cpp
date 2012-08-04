@@ -21,7 +21,7 @@ void do_math_func (char s[]);
 
 int main ()
 {
-    // begin marks whether it's the beginning of a line.
+    // `begin' marks whether it's the beginning of a line.
     int type, i, index;
     bool begin, assign;
     double op, op2, val;
@@ -162,7 +162,7 @@ int main ()
             assign = false;
             clear();
 
-            // continue to escape "begin = false".
+            // continue to escape `begin = false'.
             continue;
 
         default:

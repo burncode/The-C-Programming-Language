@@ -14,7 +14,35 @@ DISTDIR=$(top)Solutions-$(VERSION)
 
 
 
-all: Chapter3 Chapter2 Chapter1
+all: Tail Sort Expr Entab Detab Chapter5 Chapter4 Chapter3 Chapter2 Chapter1 Caculator
+
+.PHONY:Tail
+Tail:
+	$(MAKE) -C tail
+
+.PHONY:Sort
+Sort:
+	$(MAKE) -C sort
+
+.PHONY:Expr
+Expr:
+	$(MAKE) -C expr
+
+.PHONY:Entab
+Entab:
+	$(MAKE) -C entab
+
+.PHONY:Detab
+Detab:
+	$(MAKE) -C detab
+
+.PHONY:Chapter5
+Chapter5:
+	$(MAKE) -C ch5
+
+.PHONY:Chapter4
+Chapter4:
+	$(MAKE) -C ch4
 
 .PHONY:Chapter3
 Chapter3:
@@ -28,10 +56,22 @@ Chapter2:
 Chapter1:
 	$(MAKE) -C ch1
 
+.PHONY:Caculator
+Caculator:
+	$(MAKE) -C calculator
+
 tags: 
+	$(MAKE) -C tail/ $(MFLAGS) $@
+	$(MAKE) -C sort/ $(MFLAGS) $@
+	$(MAKE) -C expr/ $(MFLAGS) $@
+	$(MAKE) -C entab/ $(MFLAGS) $@
+	$(MAKE) -C detab/ $(MFLAGS) $@
+	$(MAKE) -C ch5/ $(MFLAGS) $@
+	$(MAKE) -C ch4/ $(MFLAGS) $@
 	$(MAKE) -C ch3/ $(MFLAGS) $@
 	$(MAKE) -C ch2/ $(MFLAGS) $@
 	$(MAKE) -C ch1/ $(MFLAGS) $@
+	$(MAKE) -C calculator/ $(MFLAGS) $@
 
 .PHONY: dist
 
@@ -39,9 +79,17 @@ dist:
 	rm -rf $(DISTDIR)
 	mkdir $(DISTDIR)
 	cp $(ede_FILES) $(DISTDIR)
+	$(MAKE) -C tail $(MFLAGS) DISTDIR=$(DISTDIR)/tail dist
+	$(MAKE) -C sort $(MFLAGS) DISTDIR=$(DISTDIR)/sort dist
+	$(MAKE) -C expr $(MFLAGS) DISTDIR=$(DISTDIR)/expr dist
+	$(MAKE) -C entab $(MFLAGS) DISTDIR=$(DISTDIR)/entab dist
+	$(MAKE) -C detab $(MFLAGS) DISTDIR=$(DISTDIR)/detab dist
+	$(MAKE) -C ch5 $(MFLAGS) DISTDIR=$(DISTDIR)/ch5 dist
+	$(MAKE) -C ch4 $(MFLAGS) DISTDIR=$(DISTDIR)/ch4 dist
 	$(MAKE) -C ch3 $(MFLAGS) DISTDIR=$(DISTDIR)/ch3 dist
 	$(MAKE) -C ch2 $(MFLAGS) DISTDIR=$(DISTDIR)/ch2 dist
 	$(MAKE) -C ch1 $(MFLAGS) DISTDIR=$(DISTDIR)/ch1 dist
+	$(MAKE) -C calculator $(MFLAGS) DISTDIR=$(DISTDIR)/calculator dist
 	tar -cvzf $(DISTDIR).tar.gz $(DISTDIR)
 	rm -rf $(DISTDIR)
 
