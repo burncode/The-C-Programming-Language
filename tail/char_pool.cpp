@@ -4,7 +4,7 @@
 
 // Header struct preceding one chunk of memory
 // in this pool to record information of this chunk.
-// size marks the total size of this chunk including Header itself.
+// `size' marks the total size of this chunk including Header itself.
 // Note that this struct does not take alignment into account.
 struct Header {
     Header* p_next;
@@ -14,30 +14,27 @@ struct Header {
 // Pointer to the first node of free chunk list.
 static Header* p_free = NULL;
 
-// Add chunk ptr to free list.
-// Note that the free list is ordered by address of each chunk
-// and chunks can merge into bigger one if they are contiguous.
 void free_mem (void* ptr)
 {
     Header* p;
     Header* prev;
     Header* cur;
     
-    // Find the pointer to the header of ptr.
+    // Find the pointer to the header of `ptr'.
     cur = (Header*) (ptr) - 1;
 
     for (p = p_free, prev = NULL; 
          p <= cur && p != NULL; 
          prev = p, p = p->p_next) {
-        // Search for the first point p
-        // that is larger than cur in terms of
+        // Search for the first point `p'
+        // that is larger than `cur' in terms of
         // the address of header they point to.
         ;
     }
 
     if (prev != NULL) {
         if (prev + prev->size == cur) {
-            // cur can be merged into prev.
+            // `cur' can be merged into prev.
             prev->size += cur->size;
             cur = prev;
 
@@ -46,12 +43,12 @@ void free_mem (void* ptr)
         }
 
     } else {
-        // cur should be the new head of the list.
+        // `cur' should be the new head of the list.
         p_free = cur;
     }
 
     if (cur + cur->size == p) {
-        // p can be merged into cur.
+        // `p' can be merged into `cur'.
         cur->size += p->size;
         cur->p_next = p->p_next;
 
@@ -60,8 +57,6 @@ void free_mem (void* ptr)
     }
 }
 
-// Return a pointer the a memory chunk in this pool.
-// This function will check free list first.
 void* alloc_mem (int size)
 {
     Header* p;
@@ -82,7 +77,7 @@ void* alloc_mem (int size)
                 next = p->p_next;
                 
             } else {
-                // Split this chunk according to size
+                // Split this chunk according to `size'
                 // and put the remainder into free list.
                 next = p + nheader;
                 next->p_next = p->p_next;

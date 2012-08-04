@@ -27,7 +27,7 @@ void print_help ();
 
 // char_pool.cpp
 
-// Add chunk ptr to free list.
+// Add chunk `ptr' to free list.
 // Note that the free list is ordered by address of each chunk
 // and chunks can merge into bigger one if they are contiguous.
 void free_mem (void* ptr);

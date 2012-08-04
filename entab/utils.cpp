@@ -25,13 +25,17 @@ int find_next_stop (int i, char tab_flags[])
 
 void print_help ()
 {
-    printf ("Usage: entab [-begin] [+inc].\n");
-    printf ("       entab [stop...].\n");
+    printf ("Usage: entab [-BEGIN] [+INC].\n");
+    printf ("       entab [STOP...].\n\n");
+    printf ("BEGIN marks the first position \\t.\n");
+    printf ("Default value of BEGIN is 0.\n");
+    printf ("INC marks the number of spaces between every two \\t.\n");
+    printf ("Default value of INC is 8.\n\n");
+
+    printf ("STOP marks the exact position of a \\t.\n\n");
+
     printf ("Note that 2 modes above cannot be specified ");
     printf ("at the same time.\n");
-    printf ("If no arguments are specified, ");
-    printf ("the default mode is inc-mode with ");
-    printf ("begin = 0 and inc = 8.\n");
 }
 
 

@@ -16,10 +16,10 @@ void detab (char tab_flags[])
 {
     int c,  i,  next;
 
-    // i marks the current point of the input,  starts from 1.
-    // next marks the next tab point,  which is a multiple of NUM.
-    // Note that the point next cannot hold any character, 
-    // input after next point starts from next + 1.
+    // `i' marks the current point of the input, starts from 1.
+    // `next' marks the next tab point.
+    // Note that the point `next' cannot hold any character, 
+    // input after `next' point starts from next + 1.
     for (i =  1; (c =  getchar ()) !=  EOF; ++i) {
         if (c ==  '\t') {
             // Replace tab with blanks.

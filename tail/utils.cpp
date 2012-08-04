@@ -12,13 +12,11 @@
 #include <stdio.h>
 #include <string.h>
 
-// Note that s contains '\n' and this function
-// returns the number of characters including '\n'.
 int my_getline (char s[], int lim) 
 {
     int c, i;
 
-    // i < lim - 1 because we should leave at least
+    // `i < lim - 1' because we should leave at least
     // one space for \0.
     for (i = 0; i < lim - 1 
          && (c = getchar ()) != EOF 
@@ -26,7 +24,10 @@ int my_getline (char s[], int lim)
         s[i] = c;
     }
 
-    if (c == '\n' && i < lim - 1) {
+    if (c == '\n') {
+        // Here `i' can never be `lim - 1', because
+        // the loop condition above has already
+        // check `i < lim - 1' when `c == \n'.
         s[i++] = c;
     }
     s[i] = '\0';
@@ -35,4 +36,8 @@ int my_getline (char s[], int lim)
 }
 
 void print_help ()
-{ printf ("Usage: tail [-n].\n"); }
+{ 
+    printf ("Usage: tail [-NUM].\n\n"); 
+    printf ("NUM marks the number of output lines.\n");
+    printf ("Default vale of NUM is 10.\n");
+}

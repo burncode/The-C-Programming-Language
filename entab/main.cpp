@@ -20,9 +20,9 @@
 
 int main (int argc, char* argv[]) 
 {
-    // tab_flags marks the position of each tab locates.
-    // For example, if tab_flags[1~7] is NO
-    // and tab_flags[8] is YES, then a '\t' in position 1~8
+    // `tab_flags' marks the position of each tab locates.
+    // For example, if `tab_flags[1~7]' is `NO'
+    // and `tab_flags[8]' is `YES', then a '\t' in position 1~8
     // will move the cursor directly to 9, which means
     // the character right after '\t' will appear at postion 9.
     bool inc_mode, list_mode;
