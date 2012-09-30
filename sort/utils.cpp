@@ -44,7 +44,6 @@ void swap (char* v[], int i, int j)
 
 void find_field (const char* s, int field_num, int* begin, int* end)
 {
-    // `count' marks the number of successive blanks.
     int count, i;
 
     if (field_num < 1) {

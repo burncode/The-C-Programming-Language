@@ -15,7 +15,7 @@
 
 #define MAXLINE 1024
 
-int htoi (char s[], int *result);
+int htoi (const char s[], int *result);
 
 int main ()
 {
@@ -31,7 +31,7 @@ int main ()
     return 0;
 }
 
-int htoi (char s[], int* result)
+int htoi (const char s[], int* result)
 {
     int i, res, c, sign;
 

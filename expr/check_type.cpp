@@ -3,7 +3,7 @@
  * Author: bear         <jrjbear@gmail.com>                             **
  * Date: 2012--07--01                                                   **
  *                                                                      **
- * File: getop.cpp                                                      **
+ * File: check_type.cpp                                                 **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
@@ -15,7 +15,7 @@
 #include <string.h>
 #include "expr.h"
 
-int getop (char s[])
+int check_type (const char s[])
 {
     int i;
     char c;

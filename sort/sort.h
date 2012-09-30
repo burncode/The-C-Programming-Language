@@ -20,7 +20,7 @@
 #define MAXLINE 1024
 
 
-typedef int (*CmpFn) (void*, void*);
+typedef int (*CmpFn) (const void*, const void*);
 
 
 extern bool g_ignore_case;
@@ -31,9 +31,9 @@ void qsort (char* lineptr[], int left, int right, CmpFn fn);
 
 
 // compare.cpp
-int my_strcmp (char* s1, char* s2);
-int numcmp (char* s1, char* s2);
-int dircmp (char* s1, char* s2);
+int my_strcmp (const char* s1, const char* s2);
+int numcmp (const char* s1, const char* s2);
+int dircmp (const char* s1, const char* s2);
 
 
 

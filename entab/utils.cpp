@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "entab.h"
 
-int find_next_stop (int i, char tab_flags[]) 
+int find_next_stop (int i, const char tab_flags[]) 
 {
     for (; i < MAXSIZE; ++i) {
         if (tab_flags[i] == YES) {

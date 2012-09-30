@@ -9,17 +9,18 @@
  *************************************************************************
  */
 
-
 #include <stdio.h>
-#include <math.h>
 #include <string.h>
-#include "calc.h"
 
+#define BUFSIZE 100
+
+// Note that '\n' is removed in s and this function
+// returns the number of the remaining characters.
 int my_getline (char s[], int lim) 
 {
     int c, i;
 
-    // `i < lim - 1' because we should leave at least
+    // i < lim - 1 because we should leave at least
     // one space for '\0'.
     for (i = 0; i < lim - 1 
          && (c = getchar ()) != EOF 
@@ -27,26 +28,39 @@ int my_getline (char s[], int lim)
         s[i] = c;
     }
 
-    if (c == '\n') {
-        // Here `i' can never be `lim - 1', because
-        // the loop condition above has already
-        // check `i < lim - 1' when `c == \n'.
-        s[i++] = c;
-    }
     s[i] = '\0';
-
-    return i;
+    if (c == EOF) {
+        return -1;
+    } else {
+        return i;
+    }
 }
 
-void do_math_func (const char s[])
+void reverse (char s[])
 {
-    if (strcmp (s, "sin") == 0) {
-        push (sin (pop ()));
-    } else if (strcmp (s, "cos") == 0) {
-        push (cos (pop ()));
-    } else if (strcmp (s, "exp") == 0) {
-        push (exp (pop ()));
+    int c, i, j;
+
+    for (i = 0, j = strlen(s) - 1; 
+         i < j; i++, j--) {
+        c = s[i];
+        s[i] = s[j];
+        s[j] = c;
+    }
+}
+
+
+
+static int buf[BUFSIZE];
+static int bufp = 0;
+
+int getch () 
+{ return (bufp > 0)? buf[--bufp]: getchar (); }
+
+void ungetch (int c)
+{
+    if (bufp >= BUFSIZE) {
+        printf ("Stack overflow\n");
     } else {
-        printf ("Unknown mathematic command: %s\n", s);
+        buf[bufp++] = c;
     }
 }

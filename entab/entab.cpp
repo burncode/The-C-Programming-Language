@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "entab.h"
 
-void entab (char tab_flags[]) 
+void entab (const char tab_flags[]) 
 {
     int c, i, next, last;
 

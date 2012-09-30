@@ -26,7 +26,7 @@
 
 
 
-int my_strcmp (char* s1, char* s2)
+int my_strcmp (const char* s1, const char* s2)
 {
     int ret;
 
@@ -40,7 +40,7 @@ int my_strcmp (char* s1, char* s2)
     return ret;
 }
 
-int numcmp (char* s1, char* s2)
+int numcmp (const char* s1, const char* s2)
 {
     double v1, v2;
 
@@ -50,7 +50,7 @@ int numcmp (char* s1, char* s2)
     return (v1 > v2? 1: v1 == v2? 0: -1);
 }
 
-int dircmp (char* s1, char* s2)
+int dircmp (const char* s1, const char* s2)
 {
     int ret;
     while (*s1 != '\0' && *s2 != '\0') {

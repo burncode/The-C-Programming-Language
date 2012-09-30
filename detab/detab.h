@@ -28,11 +28,11 @@
 int getop (const char* arg, char* s);
 
 // utils.cpp
-int find_next_stop (int i, char tab_flags[]);
+int find_next_stop (int i, const char tab_flags[]);
 void print_help ();
 
 // detab.cpp
-void detab (char tab_flags[]);
+void detab (const char tab_flags[]);
 
 
 #endif // _DETAB_H_

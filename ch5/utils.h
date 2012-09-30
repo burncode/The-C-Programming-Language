@@ -1,35 +1,27 @@
 /*************************************************************************
  *                                                                      **
  * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
+ * Date: 2012--07--19                                                   **
  *                                                                      **
- * File: expr.h                                                         **
+ * File: utils.h                                                        **
  * Description:                                                         **
  *                                                                      **
  *************************************************************************
  */
 
 
-#ifndef _EXPR_H_
-#define _EXPR_H_
+#ifndef _UTILS_H_
+#define _UTILS_H_
 
-#define NUMBER '0'
-#define MATH 'm'
-#define UNKNOWN '\0'
+// Note that '\n' is removed in s and this function
+// returns the number of the remaining characters.
+int my_getline (char s[], int lim);
 
-// stack.cpp
-void push (double f);
-double pop ();
-double top ();
-void dup ();
-void swap ();
-void clear ();
+void reverse (char s[]);
 
-// check_type.cpp
-int check_type (const char s[]);
+int getch ();
+
+void ungetch (int c);
 
 
-#endif // _EXPR_H_
-
-
-
+#endif // _UTILS_H_

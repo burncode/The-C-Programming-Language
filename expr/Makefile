@@ -9,8 +9,8 @@
 top=../
 ede_FILES=Project.ede Makefile
 
-expr_SOURCES=main.cpp getop.cpp stack.cpp
-expr_OBJ= main.o getop.o stack.o
+expr_SOURCES=main.cpp check_type.cpp stack.cpp
+expr_OBJ= main.o check_type.o stack.o
 CXX= g++
 CXX_COMPILE=$(CXX) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
 CXX_DEPENDENCIES=-Wp,-MD,.deps/$(*F).P
@@ -19,7 +19,7 @@ VERSION=1.0
 DISTDIR=$(top)Solutions-$(VERSION)/expr
 top_builddir = ..
 
-DEP_FILES=.deps/main.P .deps/getop.P .deps/stack.P
+DEP_FILES=.deps/main.P .deps/check_type.P .deps/stack.P
 
 all: expr
 

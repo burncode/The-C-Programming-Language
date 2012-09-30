@@ -16,7 +16,7 @@
 #define SIZE 256
 #define MAXLINE 1024
 
-void squeeze (char s1[], char s2[]);
+void squeeze (char s1[], const char s2[]);
 
 int main ()
 {
@@ -32,7 +32,7 @@ int main ()
     return 0;
 }
 
-void squeeze(char s1[], char s2[])
+void squeeze(char s1[], const char s2[])
 {
     // Bitmap used to record characters,
     // starts from 0 which means the first bit

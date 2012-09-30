@@ -14,8 +14,8 @@
 
 #define BUFSIZE 1024
 
-int escape (char s[], char t[]);
-int unescape (char s[], char t[]);
+int escape (char s[], const char t[]);
+int unescape (char s[], const char t[]);
 
 int main ()
 {
@@ -34,7 +34,7 @@ int main ()
     return 0;
 }
 
-int escape (char s[], char t[])
+int escape (char s[], const char t[])
 {
     int i, j;
 
@@ -66,7 +66,7 @@ int escape (char s[], char t[])
     return j;
 }
 
-int unescape (char s[], char t[])
+int unescape (char s[], const char t[])
 {
     int i, j;
 

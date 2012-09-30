@@ -16,7 +16,7 @@
 
 #define BUFSIZE 1024
 
-int expand (char s1[], char s2[]);
+int expand (const char s1[], char s2[]);
 int fill (char begin, char end, char* dest);
 
 int main ()
@@ -32,7 +32,7 @@ int main ()
     return 0;
 }
 
-int expand (char s1[], char s2[])
+int expand (const char s1[], char s2[])
 {
     int i, j, ret;
 

@@ -26,11 +26,9 @@ int main ()
     
     while ((op = getop (s)) != EOF) {
         if (op == NUMBER) {
-            printf ("number element: %f\n",
-                    atof (s));
+            printf ("number element: %f\n", atof (s));
         } else {
-            printf ("operator element: %c\n", 
-                    op);
+            printf ("operator element: %c\n", op);
         }
     }
 

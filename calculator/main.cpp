@@ -17,8 +17,6 @@
 
 #define MAXOP 100
 
-void do_math_func (char s[]);
-
 int main ()
 {
     // `begin' marks whether it's the beginning of a line.
@@ -174,17 +172,4 @@ int main ()
     }
 
     return 0;
-}
-
-void do_math_func (char s[])
-{
-    if (strcmp (s, "sin") == 0) {
-        push (sin (pop ()));
-    } else if (strcmp (s, "cos") == 0) {
-        push (cos (pop ()));
-    } else if (strcmp (s, "exp") == 0) {
-        push (exp (pop ()));
-    } else {
-        printf ("Unknown mathematic command: %s\n", s);
-    }
 }

@@ -16,7 +16,7 @@
 #define SIZE 256
 #define MAXLINE 1024
 
-int any (char s1[], char s2[]);
+int any (const char s1[], const char s2[]);
 
 int main ()
 {
@@ -38,7 +38,7 @@ int main ()
     return 0;
 }
 
-int any (char s1[], char s2[])
+int any (const char s1[], const char s2[])
 {
     // Bitmap used to record characters,
     // starts from 0 which means the first bit

@@ -15,7 +15,7 @@
 
 #define MAXLINE 1024
 
-void copy (char dst[], char src[]);
+void copy (char dst[], const char src[]);
 
 // Enlarge `*p_buf', which means we also copy
 // the existing string in `*p_buf' into the
@@ -69,7 +69,7 @@ int main ()
     return 0;
 }
 
-void copy (char dst[], char src[]) 
+void copy (char dst[], const char src[]) 
 {
     int i = 0;
     while ((dst[i] = src[i]) != '\0') {

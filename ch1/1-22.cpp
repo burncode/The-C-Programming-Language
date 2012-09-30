@@ -16,7 +16,7 @@
 
 // Output `buf' with `len' long starting at `pos'.
 // If the buffer exceeds `THRESHOLD', it will be fold.
-int output (int pos, char buf[], int len);
+int output (int pos, const char buf[], int len);
 
 int main () 
 {
@@ -77,7 +77,7 @@ int main ()
     return 0;
 }
 
-int output (int pos, char buf[], int len) 
+int output (int pos, const char buf[], int len) 
 {
     if (len == 0) {
         return pos;

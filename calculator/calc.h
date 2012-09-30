@@ -37,6 +37,8 @@ int getop (char s[]);
 // returns the number of characters including '\n'.
 int my_getline (char s[], int lim);
 
+void do_math_func (const char s[]);
+
 
 #endif // _CALC_H_
 

@@ -28,11 +28,11 @@
 int getop (const char* arg, char* s);
 
 // utils.cpp
-int find_next_stop (int i, char tab_flags[]);
+int find_next_stop (int i, const char tab_flags[]);
 void print_help ();
 
 // entab.cpp
-void entab (char tab_flags[]);
+void entab (const char tab_flags[]);
 
 
 #endif // _ENTAB_H_

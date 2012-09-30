@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "detab.h"
 
-void detab (char tab_flags[])
+void detab (const char tab_flags[])
 {
     int c,  i,  next;
 

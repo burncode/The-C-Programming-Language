@@ -18,7 +18,7 @@
 #define MAXOP 100
 
 void print_help ();
-void do_math_func (char s[]);
+void do_math_func (const char s[]);
 
 int main (int argc, char* argv[])
 {
@@ -31,7 +31,7 @@ int main (int argc, char* argv[])
     }
 
     while (--argc > 0) {
-        type = getop (*++argv);
+        type = check_type (*++argv);
         switch (type) {
         case NUMBER:
             push (atof (*argv));
@@ -127,7 +127,7 @@ void print_help ()
     printf ("\t\'c\' for clearing the stack.\n\n");
 }
 
-void do_math_func (char s[])
+void do_math_func (const char s[])
 {
     if (strcmp (s, "sin") == 0) {
         push (sin (pop ()));

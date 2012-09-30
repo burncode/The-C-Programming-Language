@@ -13,7 +13,7 @@
 #define MAXLINE 1000
 
 int my_getline (char line[], int maxline);
-void copy (char to[], char from[]);
+void copy (char to[], const char from[]);
 
 int main () 
 {
@@ -63,7 +63,7 @@ int my_getline (char s[], int lim)
     return i;
 }
 
-void copy (char to[], char from[]) 
+void copy (char to[], const char from[]) 
 {
     int i;
 

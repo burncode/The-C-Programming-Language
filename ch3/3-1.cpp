@@ -16,7 +16,7 @@
 
 #define SIZE 20
 
-int binary_search (int x, int v[], int n);
+int binary_search (int x, const int v[], int n);
 
 int main ()
 {
@@ -45,7 +45,7 @@ int main ()
     return 0;
 }
 
-int binary_search (int x, int v[], int n)
+int binary_search (int x, const int v[], int n)
 {
     int low, high, mid;
 
