@@ -1,11 +1,22 @@
+/*************************************************************************
+ *                                                                      **
+ * Author: bear         <jrjbear@gmail.com>                             **
+ * Date: 2012--11--10                                                   **
+ *                                                                      **
+ * File: char_pool.cpp                                                  **
+ * Description:                                                         **
+ *                                                                      **
+ *************************************************************************
+ */
+
 #include <stdio.h>
 
 #define DFTSIZE 1 << 10
 
-// Header struct preceding one chunk of memory
-// in this pool to record information of this chunk.
-// `size' marks the total size of this chunk including Header itself.
-// Note that this struct does not take alignment into account.
+// Header struct preceding one chunk of memory in this pool to record
+// information of this chunk. `size' marks the total size of this chunk
+// including Header itself. Note that this struct does not take alignment
+// into account.
 struct Header {
     Header* p_next;
     int size;
@@ -26,9 +37,8 @@ void free_mem (void* ptr)
     for (p = p_free, prev = NULL; 
          p <= cur && p != NULL; 
          prev = p, p = p->p_next) {
-        // Search for the first point `p'
-        // that is larger than `cur' in terms of
-        // the address of header they point to.
+        // Search for the first point `p' that is larger than `cur'
+        // in terms of the address of header they point to.
         ;
     }
 
@@ -77,8 +87,8 @@ void* alloc_mem (int size)
                 next = p->p_next;
                 
             } else {
-                // Split this chunk according to `size'
-                // and put the remainder into free list.
+                // Split this chunk according to `size' and put the
+                // remainder into free list.
                 next = p + nheader;
                 next->p_next = p->p_next;
                 next->size = p->size - nheader;
@@ -87,8 +97,8 @@ void* alloc_mem (int size)
             }
             
             if (prev == NULL) {
-                // The first chunk in free list has been used
-                // so we need to assign a new head.
+                // The first chunk in free list has been used so we
+                // need to assign a new head.
                 p_free = next;
             } else {
                 prev->p_next = next;
@@ -99,14 +109,13 @@ void* alloc_mem (int size)
         }
     }
 
-    // Cannot find available chunks in free list,
-    // allocate a new chunk.
+    // Cannot find available chunks in free list, allocate a new chunk.
     num = (nheader > DFTSIZE? nheader: DFTSIZE);
     p = new Header[num];
     p->size = num;
  
     if (p->size > nheader + 1) {
-        // There is empty space left, put them into free lsit.
+        // There is empty space left, put them into free list.
         next = p + nheader;
         next->p_next = NULL;
         next->size = p->size - nheader;

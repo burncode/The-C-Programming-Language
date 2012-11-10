@@ -19,8 +19,7 @@ int main ()
 
     while (scanf ("%lx", &x) == 1) {
         printf ("x = %#lx\n", x);
-        printf ("x has %d bits\n\n", 
-                bitcount (x));
+        printf ("x has %d bits\n\n", bitcount (x));
     }
     
     return 0;

@@ -29,8 +29,8 @@ int main ()
     len = 0;
     while ((c = getchar ()) != EOF) {
         if (c == ' ' || c == '\t' || c == '\n') {
-            // We come across a blank character,
-            // first check if we have former buffer to output.
+            // We come across a blank character, first check if
+            // we have former buffer to output.
             i = output (i, temp, len);
             len = 0;
 
@@ -61,13 +61,12 @@ int main ()
             }
 
         } else {
-            // Stores `c' in a buffer, so that
-            // we can ouput this when we encounter a blank character.
+            // Stores `c' in a buffer, so that we can ouput this
+            // when we encounter a blank character.
             temp[len++] = c;
             if (len >= THRESHOLD) {
-                // Buffer has already overflowed.
-                // Now we can just flush buffer since
-                // itself will occupy an entire line.
+                // Buffer has already overflowed. Now we can just
+                // flush buffer since itself will occupy an entire line.
                 i = output (i, temp, len);
                 len = 0;
             }

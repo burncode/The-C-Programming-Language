@@ -19,8 +19,8 @@
 
 int main (int argc, char* argv[])
 {
-    // `lines' is a ring buffer that holds pointers to
-    // the last `nlines' of the input.
+    // `lines' is a ring buffer that holds pointers to the last
+    // `nlines' of the input.
     int nlines, pos, len, op;
     char buf[MAXLINE];
     char* ptr;

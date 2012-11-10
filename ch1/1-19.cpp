@@ -15,7 +15,7 @@
 #define MAXLINE 1024
 
 
-// len should be the length of the input string
+// `len' should be the length of the input string
 // that you want to reverse.
 void reverse (char s[], int len);
 

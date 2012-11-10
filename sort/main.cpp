@@ -22,9 +22,8 @@ int g_field_num;
 
 int main (int argc, char* argv[])
 {
-    // All the input lines are stored in `lines',
-    // whose max size is limited by `cap'
-    // and current size is marked by `pos'.
+    // All the input lines are stored in `lines', whose max size is
+    // limited by `cap' and current size is marked by `pos'.
     bool reverse_flag;
     int len, pos, cap, op;
     char** lines;
@@ -89,8 +88,7 @@ int main (int argc, char* argv[])
     pos = 0;
     while ((len = my_getline (buf, MAXLINE)) >= 0) {
         if (pos == cap) {
-            // `lines' has reached its capacity,
-            // so we double `cap' here.
+            // `lines' has reached its capacity, so we double `cap' here.
             tmp = new char*[cap * 2];
             bcopy (lines, tmp, cap * sizeof (char*));
      

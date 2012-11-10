@@ -39,8 +39,7 @@ int getint (int* pn)
         ;
     }
 
-    // These characters can be the leading character
-    // of a number.
+    // These characters can be the leading character of a number.
     if (!isdigit (c) && c != '+' && c != '-') {
         ungetch (c);
         return 0;

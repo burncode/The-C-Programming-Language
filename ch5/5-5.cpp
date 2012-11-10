@@ -73,9 +73,9 @@ void my_strncpy (char* s, const char* t, int n)
         ;
     }
 
-    // Note that we do not append a '\0' at the end of s
-    // when n = 0 here.
-    // This is exactly what standard C library does.
+    // Note that we do not append a '\0' at the end of `s'
+    // when `n = 0' here. This is exactly what standard C
+    // library does.
 }
 
 int my_strncmp (char* s, const char* t, int n)

@@ -26,9 +26,8 @@ int main ()
                 state = NEWLINE;
             }
 
-            // `state == NEWLINE' here, which means
-            // we do not output empty lines when
-            // reading successive blanks.
+            // `state == NEWLINE' here, which means we do not output
+            // empty lines when reading successive blanks.
         } else {
             putchar (c);
             state = OLDLINE;

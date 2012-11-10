@@ -33,16 +33,6 @@ int main ()
     char buf[BUFSIZE];
     int pos, chance;
 
-    /*
-    ungets ("asdf");
-    printf ("%c", getch ());
-    ungets ("q");
-  printf ("%c", getch ());
- printf ("%c", getch ());
- printf ("%c", getch ());
-printf ("%c", getch ());
-    */
-
     pos = 0;
     while ((c = getch ()) != EOF) {
         buf[pos++] = c;

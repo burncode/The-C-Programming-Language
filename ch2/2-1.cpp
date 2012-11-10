@@ -18,10 +18,9 @@ int main ()
     printf ("%15s%15s%15s\n", "Type", "Max Value", "Min Value");
 
     // Note that ~0 will produce a signed value (0xffffffff on 32-bit machine).
-    // As a result ~0 >> 1 is equal to ~0 since shifting will take
-    // sign bit into consideration.
-    // We need to convert ~0 into unsigned value before shifting in this program.
-    // For example, (char) ((unsigned char) ~0) >> 1) = 0x7f,
+    // As a result ~0 >> 1 is equal to ~0 since shifting will take sign bit
+    // into consideration. We need to convert ~0 into unsigned value before
+    // shifting in this program. For example, (char) ((unsigned char) ~0) >> 1) = 0x7f,
     // while (char) (~0 >> 1) = (char) (~((unsigned char) 0) >> 1) = 0xff
     // on this machine.
 

@@ -24,15 +24,14 @@ void qsort (char* v[], int left, int right, CmpFn cmp)
         return;
     }
 
-    // Select the middle element as the pivot.
-    // `last' marks the right most element
-    // that is less than or equal to pivot.
+    // Select the middle element as the pivot. `last' marks the
+    // right most element that is less than or equal to pivot.
     swap (v, left, (left + right) / 2);
     last = left;
 
     for (i = left + 1; i <= right; i++) {
-        // Get the `g_field_num'th field and then
-        // replace character at the end with '\0'.
+        // Get the `g_field_num'th field and then replace character
+        // at the end with '\0'.
        
         find_field (v[i], g_field_num, &begin1, &end1);
         tmp1 = v[i][end1];

@@ -35,16 +35,14 @@ int check_type (const char s[])
         }
     }
 
-    // These characters can be the leading character
-    // of a number.     
+    // These characters can be the leading character of a number.     
     if (!isdigit (c) && c != '.' 
         && c != '-' && c != '+') {
         return (s[i + 1] == '\0'? c: UNKNOWN);
     }
    
-    // '+' and '-' should be followed by a digit
-    // to be a number or be followed by a '.'.
-    // For example, -.123.
+    // '+' and '-' should be followed by a digit to be a number
+    // or be followed by a '.'. For example, -.123.
     if ((c == '-' || c == '+')
         && !isdigit (s[i + 1])
         && s[i + 1] != '.') {
@@ -61,8 +59,7 @@ int check_type (const char s[])
     }
      
     if (s[i] == '.') {
-        // '.' should be followed by a digit
-        // to be a digit number.
+        // '.' should be followed by a digit to be a digit number.
         if (!isdigit (s[i + 1])) {
             return UNKNOWN;
         }

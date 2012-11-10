@@ -34,9 +34,8 @@ int main ()
 
 void squeeze(char s1[], const char s2[])
 {
-    // Bitmap used to record characters,
-    // starts from 0 which means the first bit
-    // in bitmap represents 0.
+    // Bitmap used to record characters, starts from 0 which
+    // means the first bit in bitmap represents 0.
     static char bitmap[(SIZE + 7) / 8];
 
     int i, j;

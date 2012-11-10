@@ -42,8 +42,7 @@ int getfloat (float* pf)
         ;
     }
 
-    // These characters can be the leading character
-    // of a number.
+    // These characters can be the leading character of a number.
     if (!isdigit (c) && c != '+' 
         && c != '-' && c != '.') {
         ungetch (c);
@@ -52,9 +51,8 @@ int getfloat (float* pf)
   
     sign = (c == '-')? -1: 1;
 
-    // '+' and '-' should be followed by a digit
-    // to be a number or be followed by a '.'.
-    // For example, -.123.
+    // '+' and '-' should be followed by a digit to be a number
+    // or be followed by a '.'. For example, -.123.
     if ((c == '-' || c == '+')) {
         c2 = getch ();
         if (!isdigit (c2) && c2 != '.') {
@@ -66,8 +64,7 @@ int getfloat (float* pf)
         }
     }
 
-    // '.' should be followed by a digit
-    // to be a pure digit number.
+    // '.' should be followed by a digit to be a pure digit number.
     if (c == '.') {
         c2 = getch ();
         if (!isdigit (c2)) {
@@ -87,8 +84,7 @@ int getfloat (float* pf)
     *pf *= sign;
 
     if (c == '.') {
-        // '.' should be followed by a digit
-        // to be a digit number.
+        // '.' should be followed by a digit to be a digit number.
         c2 = getch ();
         if (!isdigit (c2)) {
             ungetch (c2);

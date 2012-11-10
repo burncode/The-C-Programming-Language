@@ -155,8 +155,8 @@ int check_escape ()
             printf ("Illegal escape character: \\x%c", c);
             return -1;
         } else if (i == 1) {
-            // This is an 1-digit hexadecimal value,
-            // so we put back the next character we read.
+            // This is an 1-digit hexadecimal value, so we
+            // put back the next character we read.
             ungetc (c, stdin);
         }
 
@@ -175,8 +175,8 @@ int check_escape ()
         printf ("Illegal escape character: \\%c", c);
         return -1;
     } else if (i > 0 && i <= 2) {
-        // This is an 1/2-digit octal value,
-        // so we put back the next character we read.
+        // This is an 1/2-digit octal value, so we put back
+        // the next character we read.
         ungetc (c, stdin);
     }
 

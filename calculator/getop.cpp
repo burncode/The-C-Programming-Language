@@ -61,24 +61,21 @@ int getop (char s[])
         }
     }
 
-    // These characters can be the leading character
-    // of a number.     
+    // These characters can be the leading character of a number.     
     if (!isdigit (c) && c != '.' 
         && c != '-' && c != '+') {
         return c;
     }
    
-    // '+' and '-' should be followed by a digit
-    // to be a number or be followed by a '.'.
-    // For example, -.123.
+    // '+' and '-' should be followed by a digit to be a number
+    // or be followed by a '.'. For example, -.123.
     if ((c == '-' || c == '+')
         && !isdigit (line[pos])
         && line[pos] != '.') {
         return c;
     }
 
-    // '.' should be followed by a digit
-    // to be a pure digit number.
+    // '.' should be followed by a digit to be a pure digit number.
     if (c == '.' && !isdigit (line[pos])) {
         return c;
     }
@@ -89,8 +86,7 @@ int getop (char s[])
     } while (isdigit (c));
      
     if (c == '.') {
-        // '.' should be followed by a digit
-        // to be a digit number.
+        // '.' should be followed by a digit to be a digit number.
         if (!isdigit (line[pos])) {
             // Unget the '.'.
             pos--;

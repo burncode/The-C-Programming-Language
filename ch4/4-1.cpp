@@ -50,7 +50,7 @@ int strrindex (const char src[], const char pattern[])
         } else {
             j = next[j];
             if (j < 0) {
-                // Compare src from the beginning of pattern.
+                // Compare `src' from the beginning of pattern.
                 j = 0;
                 i++;
                 continue;
@@ -58,8 +58,8 @@ int strrindex (const char src[], const char pattern[])
         }
 
         if (pattern[j] == '\0') {
-            // Find one match, record it in start and continue searching.
-            // Note that j can never be 0 here.
+            // Find one match, record it in `start' and continue
+            // searching. Note that `j' can never be 0 here.
             start = i - j;
             j = next[j];
         }
@@ -75,9 +75,8 @@ void compute_next (const char src[], int next[])
         return;
     }
     
-    // i marks the index of the current character in src.
-    // If x = next[i], then it means 
-    // string src[0 ... (x - 1)] == src[(i - x) ... (i - 1)].
+    // `i' marks the index of the current character in `src'. If x = next[i],
+    // then it means string src[0 ... (x - 1)] == src[(i - x) ... (i - 1)].
     next[1] = 0;
     for (int i = 1; src[i] != '\0'; i++) {
         int j = next[i - 1];

@@ -24,8 +24,7 @@ int main ()
         count[i] = 0;
     }
 
-    // Count times of characters whose value
-    // is less than `MAXCHAR'.
+    // Count times of characters whose value is less than `MAXCHAR'.
     while ((c = getchar ()) != EOF) {
         if (c < MAXCHAR) {
             ++count[c];

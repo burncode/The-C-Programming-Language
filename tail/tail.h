@@ -18,8 +18,8 @@
 
 // utils.cpp
 
-// Note that s contains '\n' and this function
-// returns the number of characters including '\n'.
+// Note that s contains '\n' and this function returns the number
+// of characters including '\n'.
 int my_getline (char s[], int lim);
 
 void print_help ();
@@ -27,13 +27,13 @@ void print_help ();
 
 // char_pool.cpp
 
-// Add chunk `ptr' to free list.
-// Note that the free list is ordered by address of each chunk
-// and chunks can merge into bigger one if they are contiguous.
+// Add chunk `ptr' to free list. Note that the free list is ordered
+// by address of each chunk and chunks can merge into bigger one
+// if they are contiguous.
 void free_mem (void* ptr);
 
-// Return a pointer the a memory chunk in this pool.
-// This function will check free list first.
+// Return a pointer the a memory chunk in this pool. This function
+// will check free list first.
 void* alloc_mem (int size);
 
 

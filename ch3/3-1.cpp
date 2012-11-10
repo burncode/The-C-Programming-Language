@@ -53,16 +53,15 @@ int binary_search (int x, const int v[], int n)
     high = n;
 
     while (high > low + 1) {
-        // We ensure x's index is in range (low, high].
+        // We ensure index of `x' is in range (`low', `high'].
         mid = (low + high) >> 1;
         if (x > v[mid]) {
             low = mid;
         } else {
             high = mid;
-            // Now x may equal to v[high].
-            // If so, variable high will not change
-            // in the loop while variable low keeps
-            // increasing until low + 1 >= high.
+            // Now `x' may equal to `v[high]'. If so, variable
+            // `high' will not change in the loop while variable
+            // `low' keeps increasing until `low' + 1 >= `high'.
         }
     }
 

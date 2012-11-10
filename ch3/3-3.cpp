@@ -36,8 +36,8 @@ int expand (const char s1[], char s2[])
 {
     int i, j, ret;
 
-    // begin marks the letter on the left side of '-',
-    // while end marks the letter on the right side.
+    // `begin' marks the letter on the left side of '-',
+    // while `end' marks the letter on the right side.
     // The value is '\0' by default.
     char begin, end;
 

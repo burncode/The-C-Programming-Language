@@ -26,10 +26,10 @@ void entab ()
     int c, i, next, last;
 
     // `i' marks the current point of the input, starts from 1.
-    // `last' marks the last non-blank point.
-    // `next' marks the next tab point, which is a multiple of `NUM'.
-    // Note that the point `next' cannot hold any character,
-    // input after `next' point starts from `next + 1'.
+    // `last' marks the last non-blank point. `next' marks the
+    // next tab point, which is a multiple of `NUM'. Note that
+    // the point `next' cannot hold any character, input after
+    // `next' point starts from `next + 1'.
     for (i = 1, last = 0; 
          (c = getchar ()) != EOF; i++) {
         if (c == '\t') {

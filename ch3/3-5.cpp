@@ -69,12 +69,10 @@ int itob (int n, char s[], int b)
     }
 
     if (n < 0) {
-        // Convert negative integer into postive,
-        // and then put it into unsigned int
-        // so that even the largest negative integer
-        // can fit in.
-        // Note that we assume that the number is
-        // represented in two's complement.
+        // Convert negative integer into postive, and then
+        // put it into unsigned int so that even the largest
+        // negative integer can fit in. Note that we assume
+        // that the number is represented in two's complement.
         num = (unsigned int) ~n	+ 1;
     } else {
         num = (unsigned int) n;

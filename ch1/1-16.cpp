@@ -17,9 +17,8 @@
 
 void copy (char dst[], const char src[]);
 
-// Enlarge `*p_buf', which means we also copy
-// the existing string in `*p_buf' into the
-// new space.
+// Enlarge `*p_buf', which means we also copy the existing string
+// in `*p_buf' into the new space.
 int resize (char** p_buf, int size);
 
 int main () 

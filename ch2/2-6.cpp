@@ -45,13 +45,13 @@ int setbits (unsigned long* x, int p,
         return -1;
     }	
 
-    // mask used to clear the required bits of x to 0
+    // `mask' is used to clear the required bits of x to 0.
     unsigned long mask = ~0 << n;
     mask = ~mask;
     mask <<= (p - n + 1);
     mask = ~mask;
 
-    // bits to set to x
+    // `bits' will be set to x.
     unsigned long bits = y & ~(~0 << n);
     bits <<= (p - n + 1);
 
