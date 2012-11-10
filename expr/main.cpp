@@ -112,19 +112,18 @@ int main (int argc, char* argv[])
 
 void print_help ()
 {
-    printf ("This is a reverse Polish caculator.\n");
-    printf ("Usage: expr token1 token2 ... .\n");
-    printf ("Support digit numbers and negative numbers.\n");
-    printf ("Note that spaces are needed to separate tokens.\n\n");
+    printf ("Usage: expr token1 token2 ... .\n\n");
 
-    printf ("Arithmetic commands: \'+\', \'-\', \'*\', "
-            "\'/\', \'%%\', \'^\'.\n");
-    printf ("Mathemetic commands: \'sin\', \'cos\', \'exp\'.\n");
-    printf ("Stack commands:\n");
-    printf ("\t\'t\' for printing the top element of the stack.\n");
-    printf ("\t\'d\' for duplicating the top element of the stack.\n");
-    printf ("\t\'s\' for swapping the top 2 element of the stack.\n");
-    printf ("\t\'c\' for clearing the stack.\n\n");
+    printf ("This is a reverse Polish caculator. Support digit numbers and\n"
+            "negative numbers. Note that spaces are needed to separate tokens.\n\n");
+
+    printf ("Arithmetic commands: \'+\', \'-\', \'*\', \'/\', \'%%\', \'^\'.\n"
+            "Mathemetic commands: \'sin\', \'cos\', \'exp\'.\n"
+            "Stack commands:\n"
+            "\t\'t\' for printing the top element of the stack.\n"
+            "\t\'d\' for duplicating the top element of the stack.\n"
+            "\t\'s\' for swapping the top 2 element of the stack.\n"
+            "\t\'c\' for clearing the stack.\n\n");
 }
 
 void do_math_func (const char s[])

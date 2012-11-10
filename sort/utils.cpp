@@ -90,10 +90,10 @@ void print_help ()
     printf ("Usage: sort [-nrdf] [-k NUM].\n\n");
     printf ("-n: sort by numeric order.\n");
     printf ("-r: sort in reverse order.\n");
-    printf ("-d: sort by directory order, which compare input\n"
-            "    only on numbers, letters and blanks.\n");
+    printf ("-d: sort by directory order, which compare input only\n"
+            "    on numbers, letters and blanks.\n");
     printf ("-f: case-insensitive sort.\n");
-    printf ("-k: sort only on the NUMth field.\n"
-            "    Note that fields are separated by blanks\n"
-            "    and the leading blanks of each line will be discarded.\n");
+    printf ("-k: sort only on the NUMth field. Note that fields are\n"
+            "    separated by blanks and the leading blanks of each\n"
+            "    line will be discarded.\n");
 }

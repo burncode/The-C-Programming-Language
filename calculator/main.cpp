@@ -34,26 +34,24 @@ int main ()
     index = -1;
     val = 0;
 
-    printf ("Welcome to Simple Caculator!\n");
-    printf ("This caculator uses reverse Polish notation.\n");
-    printf ("Support digit numbers and negative numbers.\n");
-    printf ("Note that spaces are needed to separate elements.\n\n");
+    printf ("-------------Welcome to Simple Caculator!--------------\n"
+            "This caculator uses reverse Polish notation. Support digit\n"
+            "numbers and negative numbers. Note that spaces are needed\n"
+            "to separate elements.\n\n");
 
-    printf ("Arithmetic commands: \'+\', \'-\', \'*\', "
-            "\'/\', \'%%\', \'^\'.\n");
-    printf ("Mathemetic commands: \'sin\', \'cos\', \'exp\'.\n");
-    printf ("Stack commands:\n");
-    printf ("\t\'t\' for printing the top element of the stack.\n");
-    printf ("\t\'d\' for duplicating the top element of the stack.\n");
-    printf ("\t\'s\' for swapping the top 2 element of the stack.\n");
-    printf ("\t\'c\' for clearing the stack.\n\n");
+    printf ("Arithmetic commands: \'+\', \'-\', \'*\', \'/\', \'%%\', \'^\'.\n"
+            "Mathemetic commands: \'sin\', \'cos\', \'exp\'.\n"
+            "Stack commands:\n"
+            "\t\'t\' for printing the top element of the stack.\n"
+            "\t\'d\' for duplicating the top element of the stack.\n"
+            "\t\'s\' for swapping the top 2 element of the stack.\n"
+            "\t\'c\' for clearing the stack.\n\n");
 
-    printf ("Use [A-Z] for variables to store results.\n");
-    printf ("You can assign values to variables, note that\n");
-    printf ("in this case variable must appear as the first element\n");
-    printf ("and '=' must appear as the last element.\n");
-    printf ("For example, \"A ***** =\" is legal so that\n");
-    printf ("A will be set to the value of expression in the middle.\n\n");
+    printf ("Use [A-Z] for variables to store results. You can assign\n"
+            "values to variables, note that in this case variable must\n"
+            "appear as the first element and '=' must appear as the\n"
+            "last element. For example, \"A ***** =\" is legal so that\n"
+            "A will be set to the value of expression in the middle.\n\n");
 
     printf ("Finally, 'v' stands for the result of the last expression.\n\n");
 

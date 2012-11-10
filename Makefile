@@ -14,7 +14,7 @@ DISTDIR=$(top)Solutions-$(VERSION)
 
 
 
-all: Tail Sort Expr Entab Detab Chapter5 Chapter4 Chapter3 Chapter2 Chapter1 Caculator
+all: Tail Sort Expr Entab Detab Dcl Chapter5 Chapter4 Chapter3 Chapter2 Chapter1 Caculator
 
 .PHONY:Tail
 Tail:
@@ -35,6 +35,10 @@ Entab:
 .PHONY:Detab
 Detab:
 	$(MAKE) -C detab
+
+.PHONY:Dcl
+Dcl:
+	$(MAKE) -C dcl
 
 .PHONY:Chapter5
 Chapter5:
@@ -66,6 +70,7 @@ tags:
 	$(MAKE) -C expr/ $(MFLAGS) $@
 	$(MAKE) -C entab/ $(MFLAGS) $@
 	$(MAKE) -C detab/ $(MFLAGS) $@
+	$(MAKE) -C dcl/ $(MFLAGS) $@
 	$(MAKE) -C ch5/ $(MFLAGS) $@
 	$(MAKE) -C ch4/ $(MFLAGS) $@
 	$(MAKE) -C ch3/ $(MFLAGS) $@
@@ -84,6 +89,7 @@ dist:
 	$(MAKE) -C expr $(MFLAGS) DISTDIR=$(DISTDIR)/expr dist
 	$(MAKE) -C entab $(MFLAGS) DISTDIR=$(DISTDIR)/entab dist
 	$(MAKE) -C detab $(MFLAGS) DISTDIR=$(DISTDIR)/detab dist
+	$(MAKE) -C dcl $(MFLAGS) DISTDIR=$(DISTDIR)/dcl dist
 	$(MAKE) -C ch5 $(MFLAGS) DISTDIR=$(DISTDIR)/ch5 dist
 	$(MAKE) -C ch4 $(MFLAGS) DISTDIR=$(DISTDIR)/ch4 dist
 	$(MAKE) -C ch3 $(MFLAGS) DISTDIR=$(DISTDIR)/ch3 dist
