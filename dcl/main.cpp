@@ -26,10 +26,10 @@ int main ()
             "separate declarations.\n\n");
 
     printf ("Note that this parser does not check type, which means\n"
-            "anything appears in that position will be regarded as\n"
-            "a type name. Also we only support one type qualifier: \"const\".\n"
+            "anything appears in that position will be regarded as a\n"
+            "type name. Also we only support one type qualifier: \"const\".\n"
             "Another restriction is that you will have to give identifier\n"
-            "name in a parameter list of a function declaration.\n\n");
+            "name in the parameter list of a function declaration.\n\n");
 
     type = gettoken (token);
     while (type != EOF) {
