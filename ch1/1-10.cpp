@@ -1,32 +1,27 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-10.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 00:42:11 2013
+//
+// File: 1-10.cpp
+// Description: Print escape character
 
 #include <stdio.h>
 
-int main ()
+int main(int argc, char* argv[])
 {
-    int c;
+    int c = -1;
 
-    for (c = getchar (); c != EOF; c = getchar ()) {
+    while ((c = getchar()) != EOF) {
         if (c == '\t') {
-            putchar ('\\');
-            putchar ('t');
+            putchar('\\');
+            putchar('t');
         } else if (c == '\b') {
-            putchar ('\\');
-            putchar ('b');
+            putchar('\\');
+            putchar('b');
         } else if (c == '\\') {
-            putchar ('\\');
-            putchar ('\\');
+            putchar('\\');
+            putchar('\\');
         } else {
-            putchar (c);
+            putchar(c);
         }
     }
 

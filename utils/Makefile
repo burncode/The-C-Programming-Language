@@ -1,0 +1,35 @@
+sources := $(wildcard *.cpp)
+objects := $(subst .cpp,.o,$(sources))
+dependencies := $(subst .cpp,.d,$(sources))
+libraries := libutils.a
+
+.PHONY: all
+all: $(libraries)
+
+libutils.a: $(objects)
+	$(AR) $(ARFLAGS) $@ $?
+
+.PHONY: clean
+clean:
+	rm -f *.d *.o *.a
+	rm -f $(libraries)
+
+ifneq "$(MAKECMDGOALS)" "clean"
+  -include $(dependencies)
+endif
+
+# $(call make-depend,source-file,object-file,depend-file)
+define make-depend
+  $(CXX) -MM 		\
+         -MF $3		\
+         -MP            \
+         -MT $2		\
+         $(CFLAGS)      \
+         $(CPPFLAGS)	\
+         $(TARGET_ARCH) \
+         $1
+endef
+
+%.o: %.cpp
+	$(call make-depend,$<,$@,$(subst .o,.d,$@))
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<

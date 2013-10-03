@@ -1,22 +1,18 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-8.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Wed Oct  2 22:52:27 2013
+//
+// File: 1-8.cpp
+// Description: Count white spaces
 
 #include <stdio.h>
 
-int main ()
+int main(int argc, char* argv[])
 {
-    int c, ns, nt, nl;
+    int ns = 0;
+    int nt = 0;
+    int nl = 0;
 
-    for (c = getchar (), ns = 0, nt = 0, nl = 0; 
-         c != EOF; c = getchar ()) {
+    for (int c = getchar(); c != EOF; c = getchar()) {
         if (c == '\n') {
             nl++;
         } else if (c == '\t') {

@@ -1,95 +1,75 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-22.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 16:20:57 2013
+//
+// File: 1-22.cpp
+// Description: Fold lines that exceeds THRESHOLD
 
 #include <stdio.h>
 
-#define THRESHOLD 80
-#define NUM 8
-
-// Output `buf' with `len' long starting at `pos'.
-// If the buffer exceeds `THRESHOLD', it will be fold.
-int output (int pos, const char buf[], int len);
-
-int main () 
+int main(int argc, char* argv[])
 {
-    // `i' marks the point of the next character, starts from 1.
-    // `len' is the length of `temp'.
-    int c, i, len;
-    char temp[THRESHOLD + 1];
+    const int THRESHOLD = 80;
+    const int TAB_OFFSET = 8;
 
-    i = 1;
-    len = 0;
-    while ((c = getchar ()) != EOF) {
+    // `i' marks the position where the next character will be.
+    // `len' is the current length of `temp'.
+    int i = 1;
+    int len = 0;
+    int c = -1;
+    char temp[THRESHOLD + 1];
+    while ((c = getchar()) != EOF) {
         if (c == ' ' || c == '\t' || c == '\n') {
-            // We come across a blank character, first check if
-            // we have former buffer to output.
-            i = output (i, temp, len);
-            len = 0;
+            // Check if we have former buffer to print.
+            if (len > 0) {
+                temp[len] = '\0';
+                printf("%s", temp);
+                i += len;
+                len = 0;
+            }
 
             if (c == ' ') {
                 if (i > THRESHOLD) {
-                    putchar ('\n');
-                    putchar (c);
+                    putchar('\n');
+                    putchar(c);
                     i = 2;
                 } else {
-                    putchar (c);
+                    putchar(c);
                     ++i;
                 }
 
             } else if (c == '\t') {
                 // Caculate the next position after this tab.
-                i = (i + NUM) / NUM * NUM + 1;
+                i = (i + TAB_OFFSET - 1) / TAB_OFFSET * TAB_OFFSET;
                 if (i > THRESHOLD) {
-                    putchar ('\n');
-                    putchar (c);
-                    i = NUM + 1;
+                    putchar('\n');
+                    putchar(c);
+                    i = TAB_OFFSET + 1;
                 } else {
                     putchar (c);
+                    ++i;
                 }
 
             } else if (c == '\n') {
-                putchar (c);
+                putchar(c);
                 i = 1;
             }
 
         } else {
-            // Stores `c' in a buffer, so that we can ouput this
-            // when we encounter a blank character.
             temp[len++] = c;
-            if (len >= THRESHOLD) {
-                // Buffer has already overflowed. Now we can just
-                // flush buffer since itself will occupy an entire line.
-                i = output (i, temp, len);
+            if (len + i > THRESHOLD) {
+                // Buffer has already exceeded THRESHOLD
+                temp[len] = '\0';
+                if (i == 1) {
+                    // Beginning of a line
+                    printf("%s\n", temp);
+                } else {
+                    printf("\n%s", temp);
+                    i = len + 1;
+                }
                 len = 0;
             }
         }
     }
 
     return 0;
-}
-
-int output (int pos, const char buf[], int len) 
-{
-    if (len == 0) {
-        return pos;
-    }
-
-    if (pos + len - 1 > THRESHOLD) {
-        putchar ('\n');
-        pos = 1;
-    }
-
-    for (int i = 0; i < len; ++i) {
-        putchar (buf[i]);
-    }
-
-    return pos + len;
 }

@@ -1,55 +1,53 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-18.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 11:20:50 2013
+//
+// File: 1-18.cpp
+// Description: Delete trailing white spaces
 
 #include <stdio.h>
 
-#define MAXLINE 1024
+// Deletes trailing white spaces and skips entirely blank lines.
+// Returns the number of characters including '\n'.
+int trim(char line[], int lim);
 
-int trim (char line[], int lim);
-
-int main ()
+int main(int argc, char* argv[])
 {
+    const int MAXLINE = 1024;
+
     int len;
     char line[MAXLINE];
-
-    while ((len = trim (line, MAXLINE)) >= 0) {
-        printf ("%s", line);
+    while ((len = trim(line, MAXLINE)) > 0) {
+        printf("%s", line);
     }
 
     return 0;
 }
 
-int trim (char s[], int lim) 
+int trim(char s[], int lim) 
 {
-    int c, i, last;
+    // `last' marks the last non-blank position.
+    int last = -1;
+    int i = 0;
+    int c = -1;
 
-    // `i < lim - 1' because we should leave at least one space for '\0'.
-    // `last' marks the last non-blank point of input.
-    for (i = 0, last = -1; i < lim - 1 
-         && (c = getchar()) != EOF 
-         && c != '\n'; i++) {
-        if (c != ' ' && c != '\t') {
+    // Make sure `i < lim - 1' so as to leave at least one space for '\0'.
+    while (i < lim - 1 && (c = getchar()) != EOF) {
+        if (c == '\n') {
+            if (last >= 0) {
+                s[++last] = c;
+                break;
+            } else {
+                // Skip entirely blank lines.
+                i = 0;
+                continue;
+            }
+            
+        } else if (c != ' ' && c != '\t') {
             last = i;
         }
-        s[i] = c;
+        s[i++] = c;
     }
 
-    if(c == '\n' && last >= 0) {
-        // Here `i' can never be `lim - 1', because the loop condition
-        // above has already check `i < lim - 1' when `c == \n'. Note
-        // that we skip '\n' when the whole line is empty (`last < 0').
-        s[i] = c;
-        s[++last] = c;
-    }
     s[++last] = '\0';
-
-    return (c == EOF? -1: last);
+    return last;
 }

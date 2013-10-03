@@ -1,36 +1,32 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-12.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 00:44:44 2013
+//
+// File: 1-12.cpp
+// Description: Print one word per line
 
 #include <stdio.h>
 
-#define NEWLINE 1
-#define OLDLINE 0
+enum LineState {
+    OLD_LINE = 0,
+    NEW_LINE = 1,
+};
 
-int main ()
+int main(int argc, char* argv[])
 {
-    int c, state;
+    int c = -1;
+    LineState state = NEW_LINE;
 
-    for (state = NEWLINE, c = getchar (); 
-         c != EOF; c = getchar ()) {
+    while ((c = getchar()) != EOF) {
         if (c == ' ' || c == '\t' || c =='\n') {
-            if (state == OLDLINE) {
-                putchar ('\n');
-                state = NEWLINE;
+            if (state == OLD_LINE) {
+                putchar('\n');
+                state = NEW_LINE;
             }
-
-            // `state == NEWLINE' here, which means we do not output
+            // Here `state == NEWLINE', so we do not output
             // empty lines when reading successive blanks.
         } else {
-            putchar (c);
-            state = OLDLINE;
+            putchar(c);
+            state = OLD_LINE;
         }
     }
 

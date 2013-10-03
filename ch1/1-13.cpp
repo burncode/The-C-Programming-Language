@@ -1,35 +1,35 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-13.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 00:52:27 2013
+//
+// File: 1-13.cpp
+// Description: Show statistic of each word's length
 
 #include <stdio.h>
 
-#define IN 1
-#define OUT 0
-#define MAXVLST 40
-#define MAXWORD 14
+enum State {
+    IN = 0,
+    OUT = 1,
+};
 
-int main ()
+int main(int argc, char* argv[])
 {
-    int c, state, i, length, j, overflow, max;
-    int count[MAXWORD];
+    const int MAXVLST = 40;
+    const int MAXWORD = 14;
 
-    for (i = 0; i < MAXWORD; i++) {
+    int count[MAXWORD];
+    for (int i = 0; i < MAXWORD; i++) {
         count[i] = 0;
     }
-    overflow = length = max = 0;
 
-    for (state = OUT; (c = getchar ()) != EOF; ) {
+    int overflow = 0;
+    int length = 0;
+    int max = 0;
+    int c = -1;
+    State state = OUT;
+    while ((c = getchar()) != EOF) {
         if (c == ' ' || c == '\t' || c =='\n') {
             if (state == IN) {
-                // A word ended here.
+                // We find a word here.
                 state = OUT;
                 if (length > MAXWORD) {
                     overflow++;
@@ -39,7 +39,7 @@ int main ()
             }
 
         } else if (state == OUT) {
-            // Come across the beginning of a word.
+            // This is the beginning of a word.
             length = 1;
             state = IN;
         } else {
@@ -48,23 +48,22 @@ int main ()
     }
 	
     // Find the max count value.
-    for (i = 0; i < MAXWORD; i++) {
+    for (int i = 0; i < MAXWORD; i++) {
         if (max < count[i]) {
             max = count[i];
         }
     }
 
     if (max == 0) {
-        printf ("No word found\n");
+        printf("No word found\n");
         return 0;
     }
 
     // Get the percentage of `count[j]' to `max', and then
     // decide how many '*' should be displayed.
-    for (i = MAXVLST; i > 0; i--) {
-        for (j = 0; j < MAXWORD; j++) {
-            if ((count[j] * MAXVLST + max - 1) / max 
-                >= i) {
+    for (int i = MAXVLST; i > 0; i--) {
+        for (int j = 0; j < MAXWORD; j++) {
+            if ((count[j] * MAXVLST + max - 1) / max >= i) {
                 printf ("%4c", '*');
             } else {
                 printf ("%4c", ' ');
@@ -73,20 +72,18 @@ int main ()
         printf ("\n");
     }
 
-    for (i = 1; i <= MAXWORD; i++) {
-        printf ("%4d", i);
+    for (int i = 1; i <= MAXWORD; i++) {
+        printf("%4d", i);
     }
-    printf (" length\n");
-    for (i = 0; i < MAXWORD; i++) {
-        printf ("%4d", count[i]);
+    printf(" length\n");
+    for (int i = 0; i < MAXWORD; i++) {
+        printf("%4d", count[i]);
     }
     printf(" times\n");
 	
     if (overflow > 0) {
-        printf ("There are %d words that have more than"
-                " %d letters\n", 
+        printf ("There are %d words that have more than %d letters\n", 
                 overflow, MAXWORD);
     }
-
     return 0;
 }

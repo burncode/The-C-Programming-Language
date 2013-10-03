@@ -1,24 +1,22 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-9.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Wed Oct  2 22:53:43 2013
+//
+// File: 1-9.cpp
+// Description: Delete successive blanks
 
 #include <stdio.h>
 
-int main ()
+int main(int argc, char* argv[])
 {
-    int c, lastc;
+    int c = -1;
+    int lastc = -1;
 
-    for (lastc = -1; (c = getchar ()) != EOF; 
-         lastc = c) {
-        if (lastc != ' ' || c != ' ') {
-            putchar (c);
+    while ((c = getchar()) != EOF) { 
+        if (lastc == ' ' && c == ' ') {
+            continue;
+        } else {
+            putchar(c);
+            lastc = c;
         }
     }
 

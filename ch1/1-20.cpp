@@ -1,49 +1,44 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-20.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 13:59:59 2013
+//
+// File: 1-20.cpp
+// Description: Replace TABs with blanks
 
 #include <stdio.h>
 
-#define NUM 8
+void detab(int tab_offset);
 
-void detab ();
-
-int main()
+int main(int argc, char* argv[])
 {
-    detab ();
+    const int TAB_OFFSET = 8;
+    detab(TAB_OFFSET);
     return 0;
 }
 
-void detab () 
+void detab(int tab_offset) 
 {
-    int c, i, next;
+    // `next' marks the next tab position, which is a multiple of `tab_offset'.
+    // Note that position `next' cannot hold any character, input after
+    // `next' position starts from `next + 1'.
+    int next = -1;
+    int c = -1;
 
-    // `i' marks the current point of the input, starts from 1.
-    // `next' marks the next tab point, which is a multiple of `NUM'.
-    // Note that the point `next' cannot hold any character,
-    // input after `next' point starts from `next + 1'.
-    for (i = 1; (c = getchar ()) != EOF; ++i) {
+    // `i' marks the current position.
+    for (int i = 1; (c = getchar()) != EOF; ++i) {
         if (c == '\t') {
             // Replace tab with blanks.
-            for (next = (i + NUM) / NUM * NUM; 
+            for (next = (i + tab_offset - 1) / tab_offset * tab_offset; 
                  i <= next; ++i) {
-                putchar (' ');
+                putchar(' ');
             }
             i--;
 
         } else if (c == '\n') {
-            putchar (c);
+            putchar(c);
             i = 0;
 
         } else {
-            putchar (c);
+            putchar(c);
         }
     }
 }

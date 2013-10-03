@@ -1,30 +1,22 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-3.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Wed Oct  2 22:46:51 2013
+//
+// File: 1-3.cpp
+// Description: Convert Fahrenheit to Celsius
 
 #include <stdio.h>
 
-int main ()
+int main(int argc, char* argv[])
 {
-    float fahr, celsius;
-    int lower, upper, step;
+    int lower = 0;
+    int upper = 300;
+    int step = 20;
 
-    lower = 0;
-    upper = 300;
-    step = 20;
-
-    fahr = lower;
-    printf ("%3s %6s\n", "^F", "^C");
+    float fahr = lower;
+    printf("%3s %6s\n", "^F", "^C");
     while (fahr <= upper) {
-        celsius = (5.0 / 9.0) * (fahr - 32);
-        printf ("%3.0f %6.1f\n", fahr, celsius);
+        float celsius = (5.0 / 9.0) * (fahr - 32);
+        printf("%3.0f %6.1f\n", fahr, celsius);
         fahr = fahr + step;
     }
 

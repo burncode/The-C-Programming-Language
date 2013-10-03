@@ -1,42 +1,35 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 1-16.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 01:11:58 2013
+//
+// File: 1-16.cpp
+// Description: Print the longest line
+
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define MAXLINE 1024
+// Double the size of `buf', and then copy the existing string in it.
+// Finally returns the address of the new buffer. Note that the
+// memory in older `buf' will be freed inside the function.
+char* double_size(char* buf, int size);
 
-void copy (char dst[], const char src[]);
-
-// Enlarge `*p_buf', which means we also copy the existing string
-// in `*p_buf' into the new space.
-int resize (char** p_buf, int size);
-
-int main () 
+int main(int argc, char* argv[])
 {
-    int len, max_len, total_len, size;
-    bool need_resize;
+    const int MAXLINE = 10;
 
-    total_len = max_len = 0;
-    need_resize = false;
-    size = MAXLINE;
+    int len = 0;
+    int total_len = 0;
+    int max_len = 0;
+    int size = MAXLINE;
+    bool need_resize = false;
 
     char* longest = new char[size];
     char* buffer = new char[size];
 
     // Read input into `buffer + total_len' because we
     // may read serveral times for very long lines.
-    while ((len = my_getline 
-            (buffer + total_len, size)) > 0) {
+    while ((len = my_getline(buffer + total_len, size - total_len)) > 0) {
         total_len += len;
         if (buffer[total_len - 1] == '\n') {
             // The whole line has been read into `buffer'.
@@ -46,21 +39,32 @@ int main ()
                     delete [] longest;
                     longest = new char[size];
                 }
-                copy (longest, buffer);
+                snprintf(longest, size, "%s", buffer);
             }
             total_len = 0;
             need_resize = false;
 
-        } else {
+        } else if (size == total_len + 1) {
             // We need more space to store the whole line.
-            size = resize (&buffer, size);
+            buffer = double_size(buffer, size);
+            size *= 2;
             need_resize = true;
+        } 
+    }
+
+    // Handles the last line ended with EOF rather than '\n'.
+    if (total_len > max_len) {
+        max_len = total_len;
+        if (need_resize) {
+            delete [] longest;
+            longest = new char[size];
         }
+        snprintf(longest, size, "%s", buffer);
     }
 
     if (max_len > 0) {
-        printf ("%d\n", max_len);
-        printf ("%s", longest);
+        printf("%d\n", max_len);
+        printf("%s", longest);
     }
 
     delete [] longest;
@@ -68,19 +72,10 @@ int main ()
     return 0;
 }
 
-void copy (char dst[], const char src[]) 
-{
-    int i = 0;
-    while ((dst[i] = src[i]) != '\0') {
-        i++;
-    }
-}
-
-int resize (char** p_buf, int size)
+char* double_size(char* buf, int size)
 {
     char* tmp = new char[size * 2];
-    copy (tmp, *p_buf);
-    delete [] *p_buf;
-    *p_buf = tmp;
-    return size * 2;
+    snprintf(tmp, size * 2, "%s", buf);
+    delete [] buf;
+    return tmp;
 }
