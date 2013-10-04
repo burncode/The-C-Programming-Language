@@ -1,48 +1,47 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--06                                                   **
- *                                                                      **
- * File: 2-7.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Fri Oct  4 17:41:53 2013
+//
+// File: 2-7.cpp
+// Description: Bit operations
 
 #include <stdio.h>
+#include <stdint.h>
 
-#define SIZE sizeof (unsigned long) * 8
+// Invert `n' bits that begin at position `p' of `x'.
+int invert(uint32_t* x, int p, int n);
 
-int invert (unsigned long* x, int p, int n);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    unsigned long x;
-    int p, n;
-
-    while (scanf ("%lx%d%d", &x, 
-                  &p, &n) == 3) {
-        printf ("x = %#lx\n", x);
-        if (invert (&x, p, n) < 0) {
-            printf ("Invalid parameter\n\n");
+    uint32_t x = 0;
+    int p = -1;
+    int n = -1;
+    while (true) {
+        printf("Input parameters in hexadecimal(x p n): ");
+        if (scanf("%x%d%d", &x, &p, &n) != 3) {
+            break;
+        }
+        uint32_t save_x = x;
+        if (invert(&x, p, n) == 0) {
+            printf ("After invert(%#x, %d, %d): %#x\n\n", 
+                    save_x, p, n, x);
         } else {
-            printf ("After invert (x, %d, %d): ", 
-                    p, n);
-            printf ("%#lx\n\n", x);
+            break;
         }
     }
 
     return 0;
 }
 
-int invert (unsigned long* x, int p, int n)
+int invert(uint32_t* x, int p, int n)
 {
-    if (p >= SIZE || p < 0 
-        || n < 0 || n > p + 1) {
+    static const int BITSIZE = sizeof(uint32_t) * 8;
+
+    if (p >= BITSIZE || p < 0 || n < 0 || n > p + 1) {
+        printf("Invalid parameter (p, n): (%d, %d)\n", p, n);
         return -1;
     }
 
-    unsigned long mask = ~(~0 << n) << (p - n + 1);
+    uint32_t mask = ~(~0 << n) << (p - n + 1);
     *x ^= mask;
     return 0;
 }

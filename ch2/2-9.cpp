@@ -1,39 +1,35 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--06                                                   **
- *                                                                      **
- * File: 2-9.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Fri Oct  4 17:54:23 2013
+//
+// File: 2-9.cpp
+// Description: Bit counting
 
 #include <stdio.h>
+#include <stdint.h>
 
-int bitcount (unsigned long x);
+int bitcount(uint32_t x);
 
-int main ()
+int main(int argc, char* argv[])
 {
-    unsigned long x;
-
-    while (scanf ("%lx", &x) == 1) {
-        printf ("x = %#lx\n", x);
-        printf ("x has %d bits\n\n", bitcount (x));
+    uint32_t x = 0;
+    while (true) {
+        printf("Input parameters in hexadecimal(x): ");
+        if (scanf("%x", &x) != 1) {
+            break;
+        }
+        printf("%#x has %d bits\n\n", x, bitcount(x));
     }
     
     return 0;
 }
 
-int bitcount (unsigned long x)
+int bitcount(uint32_t x)
 {
-    int count;
-
     if (x == 0) {
         return 0;
     }
-
-    for (count = 1; (x &= (x - 1)) != 0; count++) {
+    int count = 1;
+    for (; (x &= (x - 1)) != 0; count++) {
         ;
     }
     return count;

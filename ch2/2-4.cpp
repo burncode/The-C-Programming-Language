@@ -1,57 +1,57 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 2-4.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 22:58:24 2013
+//
+// File: 2-4.cpp
+// Description: Filter a string through a pattern
+
 
 #include <stdio.h>
 #include <string.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define SIZE 256
-#define MAXLINE 1024
+void squeeze(const char pattern[], char buf[]);
 
-void squeeze (char s1[], const char s2[]);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    char s1[MAXLINE];
-    char s2[MAXLINE];
+    const int MAXLINE = 1024;
 
-    while (my_getline (s1, MAXLINE) >= 0
-           && my_getline (s2, MAXLINE) >= 0) {
-        squeeze (s1, s2);
-        printf("After squeeze, s1: %s\n", s1);
+    char line[MAXLINE];
+    char pattern[MAXLINE];
+    while (true) {
+        printf("Input source string: ");
+        if (my_getline(line, MAXLINE) <= 0) {
+            break;
+        }
+        printf("Inpute filter patter: ");
+        if (my_getline(pattern, MAXLINE) <= 0) {
+            break;
+        }
+        squeeze(pattern, line);
+        printf("After squeeze: %s\n\n", line);
     }
 
     return 0;
 }
 
-void squeeze(char s1[], const char s2[])
+void squeeze(const char pattern[], char buf[])
 {
     // Bitmap used to record characters, starts from 0 which
     // means the first bit in bitmap represents 0.
+    static const int SIZE = 256;
     static char bitmap[(SIZE + 7) / 8];
 
-    int i, j;
-    unsigned char c;
-
-    memset (bitmap, 0, sizeof (bitmap));
-    for (i = 0; s2[i] != '\0'; i++) {
-        c = s2[i];
+    memset(bitmap, 0, sizeof(bitmap));
+    for (int i = 0; pattern[i] != '\0'; i++) {
+        unsigned char c = pattern[i];
         bitmap[c / 8] |= (1 << c % 8);
     }
 
-    for (i = 0, j = 0; s1[i] != '\0'; i++) {
-        c = s1[i];
+    int offset = 0;
+    for (int i = 0; buf[i] != '\0'; i++) {
+        unsigned char c = buf[i];
         if (!(bitmap[c / 8] & (1 << c % 8))) {
-            s1[j++] = s1[i];
+            buf[offset++] = buf[i];
         }
     }
-    s1[j] = '\0';
+    buf[offset] = '\0';
 }

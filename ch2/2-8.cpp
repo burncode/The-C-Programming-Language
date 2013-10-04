@@ -1,48 +1,46 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--06                                                   **
- *                                                                      **
- * File: 2-8.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Fri Oct  4 17:47:17 2013
+//
+// File: 2-8.cpp
+// Description: Bit operations
 
 #include <stdio.h>
+#include <stdint.h>
 
-#define SIZE sizeof (unsigned long) * 8
+// Right rotate `x' by `n' bits.
+int rightrot(uint32_t* x, int n);
 
-int rightrot (unsigned long* x, int n);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    unsigned long x;
-    int n;
-
-    while (scanf ("%lx%d", &x, &n) == 2) {
-        printf ("x = %#lx\n", x);
-        if (rightrot (&x, n) < 0) {
-            printf ("Invalid parameter\n\n");
+    uint32_t x = 0;
+    int n = -1;
+    while (true) {
+        printf("Input parameters in hexadecimal(x n): ");
+        if (scanf("%x%d", &x, &n) != 2) {
+            break;
+        }
+        uint32_t save_x = x;
+        if (rightrot(&x, n) == 0) {
+            printf("After rightrot(%#x, %d): %#x\n\n", save_x, n, x);
         } else {
-            printf ("After rightrot (x, %d): ", n);
-            printf ("%#lx\n\n", x);
+            break;
         }
     }
 
     return 0;
 }
 
-int rightrot (unsigned long* x, int n)
+int rightrot(uint32_t* x, int n)
 {
+    static const int BITSIZE = sizeof(uint32_t) * 8;
     if (n < 0) {
+        printf("Invalid parameter(n): %d\n", n);
         return -1;
     }
 
-    n %= SIZE;
-    unsigned long head = *x << (SIZE - n);
-    unsigned long tail = *x >> n;
-
+    n %= BITSIZE;
+    uint32_t head = *x << (BITSIZE - n);
+    uint32_t tail = *x >> n;
     *x = head | tail;
     return 0;
 }

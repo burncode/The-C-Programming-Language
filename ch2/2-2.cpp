@@ -1,74 +1,39 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--04                                                   **
- *                                                                      **
- * File: 2-2.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Thu Oct  3 22:28:35 2013
+//
+// File: 2-2.cpp
+// Description: Read lines without using logical operators
+
 
 #include <stdio.h>
-#define MAXLINE 1000
 
-int my_getline (char line[], int maxline);
-void copy (char to[], const char from[]);
+// This is like `my_getline' except it doesn't use any logical operators.
+int my_getline2(char s[], int lim);
 
-int main () 
+int main(int argc, char* argv[])
 {
-    int len;
-    int max;
+    const int MAXLINE = 1024;
     char line[MAXLINE];
-    char longest[MAXLINE];
-
-    max = 0;
-    while ((len = my_getline (line, MAXLINE)) > 0) {
-        if (len > max) {
-            max = len;
-            copy (longest, line);
-        }
-    }
-
-    if (max > 0) {
-        printf ("%s", longest);
+    while (my_getline2(line, MAXLINE) > 0) {
+        printf("%s", line);
     }
 
     return 0;
 }
 
-int my_getline (char s[], int lim)
+int my_getline2(char s[], int lim)
 {
-    int c, i, flag;
-
-    i = 0;
-    do {
-        flag = 0;
-
-        if (i < lim - 1) {
-            if ((c = getchar ()) != EOF) {
-                if (c != '\n') {
-                    s[i++] = c;
-                    flag = 1;
-                }
-            }
+    int i = 0;
+    while (i < lim - 1) {
+        int c = getchar();
+        if (c == EOF) {
+            break;
+        } else if (c == '\n') {
+            s[i++] = c;
+            break;
         }
-    } while(flag != 0);
-
-    if(c == '\n') {
-        s[i] = c;
-        ++i;
+        s[i++] = c;
     }
     s[i] = '\0';
     return i;
-}
-
-void copy (char to[], const char from[]) 
-{
-    int i;
-
-    i = 0;
-    while ((to[i] = from[i]) != '\0') {
-        ++i;
-    }
 }
