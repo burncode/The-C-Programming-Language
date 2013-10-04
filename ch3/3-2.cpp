@@ -1,100 +1,82 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--30                                                   **
- *                                                                      **
- * File: 3-2.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Fri Oct  4 19:10:37 2013
+//
+// File: 3-2.cpp
+// Description: Conver escape characters into visable ones and visa versa
+
 
 #include <stdio.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define BUFSIZE 1024
+int escape(char dst[], const char src[]);
+int unescape(char dst[], const char src[]);
 
-int escape (char s[], const char t[]);
-int unescape (char s[], const char t[]);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    char line[BUFSIZE];
+    const int BUFSIZE = 1024;
+
     char buf[BUFSIZE];
-
-    while (my_getline (line, BUFSIZE) >= 0) {
-        unescape (buf, line);
-        printf ("After unescape:\n%s\n", buf);
-
-        escape (line, buf);
-        printf ("Then escape this to origin input:\n%s\n\n", 
-                line);
+    char line[BUFSIZE];
+    while (my_getline(line, BUFSIZE) > 0) {
+        escape(buf, line);
+        printf("After escape: %s\n", buf);
+        unescape(line, buf);
+        printf("Unescape back to origin: %s\n", line);
     }
 
     return 0;
 }
 
-int escape (char s[], const char t[])
+int escape(char dst[], const char src[])
 {
-    int i, j;
-
-    for (i = 0, j = 0; t[i] != '\0'; ++i) {
-        switch (t[i]) {
-        case '\\':
-            s[j++] = '\\';
-            s[j++] = '\\';
-            break;
+    int offset = 0;
+    for (int i = 0; src[i] != '\0'; ++i) {
+        switch (src[i]) {
         case '\t':
-            s[j++] = '\\';
-            s[j++] = 't';
+            dst[offset++] = '\\';
+            dst[offset++] = 't';
             break;
         case '\n':
-            s[j++] = '\\';
-            s[j++] = 'n';
+            dst[offset++] = '\\';
+            dst[offset++] = 'n';
             break;
         case '\b':
-            s[j++] = '\\';
-            s[j++] = 'b';
+            dst[offset++] = '\\';
+            dst[offset++] = 'b';
             break;
         default:
-            s[j++] = t[i];
+            dst[offset++] = src[i];
             break;
         }
     }
-
-    s[j] = '\0';
-    return j;
+    dst[offset] = '\0';
+    return 0;
 }
 
-int unescape (char s[], const char t[])
+int unescape(char dst[], const char src[])
 {
-    int i, j;
-
-    for (i = 0, j = 0; t[i] != '\0'; ++i) {
-        if (t[i] == '\\') {
-            switch (t[++i]) {
-            case '\\':
-                s[j++] = '\\';
-                break;
+    int offset = 0;
+    for (int i = 0; src[i] != '\0'; ++i) {
+        if (src[i] == '\\') {
+            switch (src[++i]) {
             case 't':
-                s[j++] = '\t';
+                dst[offset++] = '\t';
                 break;
             case 'n':
-                s[j++] = '\n';
+                dst[offset++] = '\n';
                 break;
             case 'b':
-                s[j++] = '\b';
+                dst[offset++] = '\b';
                 break;
             default:
-                i--;
-                s[j++] = '\\';
+                --i;
+                dst[offset++] = '\\';
                 break;
             }
         } else {
-            s[j++] = t[i];
+            dst[offset++] = src[i];
         }
     }
-
-    s[j] = '\0';
-    return j;
+    dst[offset] = '\0';
+    return 0;
 }

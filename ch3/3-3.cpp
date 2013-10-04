@@ -1,81 +1,56 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--30                                                   **
- *                                                                      **
- * File: 3-3.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Fri Oct  4 23:51:52 2013
+//
+// File: 3-3.cpp
+// Description: Expand '-' abbreviation
 
 
 #include <stdio.h>
 #include <ctype.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define BUFSIZE 1024
+int expand(const char src[], char dst[]);
 
-int expand (const char s1[], char s2[]);
-int fill (char begin, char end, char* dest);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    char line[BUFSIZE];
-    char buf[BUFSIZE];
+    const int BUFSIZE = 1024;
 
-    while (my_getline (line, BUFSIZE) >= 0) {
-        expand (line, buf);
-        printf("After expand:\n%s\n\n", buf);
+    char buf[BUFSIZE];
+    char line[BUFSIZE];
+    while (my_getline(line, BUFSIZE) > 0) {
+        expand(line, buf);
+        printf("After expand: %s\n", buf);
     }
 
     return 0;
 }
 
-int expand (const char s1[], char s2[])
+int expand(const char src[], char dst[])
 {
-    int i, j, ret;
-
     // `begin' marks the letter on the left side of '-',
     // while `end' marks the letter on the right side.
-    // The value is '\0' by default.
-    char begin, end;
-
-    begin = end = '\0';
-    for (i = 0, j = 0; s1[i] != '\0'; ++i) {
-        if (s1[i] == '-') {
-            end = s1[i + 1];
-            ret = fill (begin, end, &s2[j - 1]);
-            
-            if (ret > 0) {
-                j += ret - 1;
-                begin = end;
-                i++;
-                continue;
-            } 
-        }
-
-        s2[j++] = s1[i];
-        begin = s1[i];
-    }
-
-    s2[j] = '\0';
-    return j;
-}
-
-int fill (char begin, char end, char* dest)
-{
-    int i = 0;
-
-    if (begin <= end) {
-        if (islower (begin) && islower (end) 
-            || isupper (begin) && isupper (end) 
-            || isdigit (begin) && isdigit (end)) {
-            for (; begin + i <= end; ++i) {
-                dest[i] = begin + i;
+    char begin = '\0';
+    char end = '\0';
+    int offset = 0;
+    for (int i = 0; src[i] != '\0'; ++i) {
+        if (src[i] == '-') {
+            end = src[i + 1];
+            if (begin < end) {
+                if (islower(begin) && islower(end) 
+                    || isupper(begin) && isupper(end) 
+                    || isdigit(begin) && isdigit(end)) {
+                    for (int j = 1; begin + j <= end; ++j) {
+                        dst[offset++] = begin + j;
+                    }
+                    begin = '\0';
+                    ++i;
+                    continue;
+                }
             }
         }
+        dst[offset++] = src[i];
+        begin = src[i];
     }
-
-    return i;
+    dst[offset] = '\0';
+    return 0;
 }

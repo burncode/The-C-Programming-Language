@@ -5,6 +5,7 @@
 // Description: 
 
 #include <stdio.h>
+#include <string.h>
 
 int my_getline(char s[], int lim)
 {
@@ -21,4 +22,13 @@ int my_getline(char s[], int lim)
     }
     s[i] = '\0';
     return i;
+}
+
+void reverse(char s[])
+{
+    for (int i = 0, j = strlen(s) - 1; i < j; i++, j--) {
+        char c = s[i];
+        s[i] = s[j];
+        s[j] = c;
+    }
 }

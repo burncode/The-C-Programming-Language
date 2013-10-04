@@ -11,5 +11,6 @@
 // returns the number of characters including '\n'.
 int my_getline(char line[], int lim);
 
+void reverse(char s[]);
 
 #endif // UTILS_UTILS_H_

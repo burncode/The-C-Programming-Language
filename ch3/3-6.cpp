@@ -1,69 +1,50 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--04--30                                                   **
- *                                                                      **
- * File: 3-6.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sat Oct  5 00:47:06 2013
+//
+// File: 3-6.cpp
+// Description: Convert integer to string padding to required width
 
 
 #include <stdio.h>
-#include <string.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <time.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define BUFSIZE 1024
+void itoa(int n, char s[], int width);
 
-void itoa (int n, char s[], int width);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    srand (time (NULL));
+    const int BUFSIZE = 1024;
+    const int MAXVAL = 1024;
+    srand(time(NULL));
 
     char number[BUFSIZE];
-
     for (int i = 0; i < 10; ++i) {
-        int n = rand () % INT_MAX;
-        int sign = (rand () % 2 > 0? 1: -1);
-        int width = rand () % 12 + 6;
-
-        itoa (n * sign, number, width);
-        printf ("itoa (%d) in minimum width (%d):\n%s\n", 
-                n * sign, width, number);
+        int n = rand() % MAXVAL;
+        int sign = (rand() % 2 > 0? 1: -1);
+        int width = rand() % 8 + 2;
+        itoa(n * sign, number, width);
+        printf("itoa(%d) in minimum width(%d):\n%s\n", 
+               n * sign, width, number);
     }    
 
     return 0;
 }
 
-void unit_test(int n, int w)
+void itoa(int n, char s[], int width)
 {
-    char buf[BUFSIZE];
-
-    itoa (n, buf, w);
-    printf("itoa (%d, %d): %s\n", n, w, buf);
-}
-
-void itoa (int n, char s[], int width)
-{
-    int i;
-    unsigned int num;
-
+    unsigned int num = (unsigned int)n;
     if (n < 0) {
-        // Convert negative integer into postive, and then
-        // put it into unsigned int so that even the largest
-        // negative integer can fit in. Note that we assume
-        // that the number is represented in two's complement.
-        num = (unsigned int) ~n	+ 1;
-    } else {
-        num = (unsigned int) n;
+        // Convert negative number to its opposite one. Note that
+        // in 2's complement representation, it is tricky to handle
+        // largest negative number because of the limitation on
+        // signed value. This problem can be fixed by using unsigned
+        // value to fit in the largest negative number.
+        num = (unsigned int)~n + 1;
     }
 
-    i = 0;
+    int i = 0;
     do {
         s[i++] = num % 10 + '0';
     } while ((num /= 10) > 0);
@@ -71,11 +52,9 @@ void itoa (int n, char s[], int width)
     if (n < 0) {
         s[i++] = '-';
     }
-
     while (i < width) {
         s[i++] = ' ';
     }
-
     s[i] = '\0';
-    reverse (s);
+    reverse(s);
 }
