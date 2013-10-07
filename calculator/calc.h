@@ -12,7 +12,6 @@ const int NUMBER = '0';
 const int ALPHA = 'A';
 const int MATH = 'm';
 const int VAL = 'v';
-const int ERROR = 'e';
 
 // stack.cpp
 void push(double f, char c = '\0');

@@ -1,48 +1,44 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--17                                                   **
- *                                                                      **
- * File: 4-13.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Mon Oct  7 19:29:48 2013
+//
+// File: 4-13.cpp
+// Description: Reverse a string using recursive way
 
 
 #include <stdio.h>
 #include <string.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define MAXSIZE 1024
+void my_reverse(char s[]);
 
-void reverse (char s[]);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    char line[MAXSIZE];
+    const int MAXSIZE = 1024;
 
-    while (my_getline (line, MAXSIZE) >= 0) {
-        reverse (line);
-        printf ("After reverse: %s\n\n", line);
+    int len = 0;
+    char line[MAXSIZE];
+    while ((len = my_getline(line, MAXSIZE)) > 0) {
+        line[len - 1] = '\0';
+        my_reverse(line);
+        printf("After reverse: %s\n\n", line);
     }
 
     return 0;
 }
 
-void reverse (char s[])
+void my_reverse(char s[])
 {
-    size_t len = strlen (s);
+    size_t len = strlen(s);
     if (len > 1) {
-        reverse (s + 1);
+        reverse(s + 1);
+    } else if (len == 0) {
+        return;
     }
     
     char first = s[0];
-
     for (size_t i = 0; i < len - 1; ++i) {
         s[i] = s[i + 1];
     }
-
     s[len - 1] = first;
 }
 

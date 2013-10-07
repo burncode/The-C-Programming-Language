@@ -1,52 +1,59 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--05--03                                                   **
- *                                                                      **
- * File: 4-1.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
-
+// Author: jrjbear@gmail.com
+// Date: Sat Oct  5 23:27:34 2013
+//
+// File: 4-1.cpp
+// Description: String search(returns the rightmost one) using KMP
 
 #include <stdio.h>
 #include <string.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define MAXSIZE 1024
-#define BUFSIZE 1024
+int strrindex(const char src[], const char pattern[]);
+void compute_next(const char src[], int next[]);
 
-int strrindex (const char src[], const char pattern[]);
-void compute_next (const char src[], int next[]);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    char line[BUFSIZE];
-    char pattern[BUFSIZE];
+    const int MAXLINE = 1024;
 
-    while (my_getline (line, BUFSIZE) >= 0
-           && my_getline (pattern, BUFSIZE) >= 0) {
-        printf("strrindex (%s, %s): %d\n", line, pattern, 
-               strrindex (line, pattern));
+    int len = 0;
+    char line[MAXLINE];
+    char pattern[MAXLINE];
+    while (true) {
+        printf("Input source string: ");
+        if ((len = my_getline(line, MAXLINE)) <= 0) {
+            break;
+        }
+        line[len - 1] = '\0';        
+
+        printf("Input pattern: ");
+        if ((len = my_getline(pattern, MAXLINE)) <= 0) {
+            break;
+        }
+        pattern[len - 1] = '\0';
+        printf("strrindex(%s, %s): %d\n\n", line, pattern, 
+               strrindex(line, pattern));
     }
 
     return 0;
 }
 
-int strrindex (const char src[], const char pattern[])
+int strrindex(const char src[], const char pattern[])
 {
-    static int next[MAXSIZE];
-    compute_next (pattern, next);
+    static const int MAXSIZE = 1024;
+    int next[MAXSIZE];
+    if (strlen(pattern) > MAXSIZE) {
+        printf("Pattern length overflow: %dvs%d", strlen(pattern), MAXSIZE);
+        return -1;
+    }
+    compute_next(pattern, next);
 
-    int i, j, start;
-    i = j = 0;
-    start = -1;
+    int i = 0;
+    int j = 0;
+    int start = -1;
     while (src[i] != '\0') {
         if (src[i] == pattern[j]) {
             i++;
             j++;
-
         } else {
             j = next[j];
             if (j < 0) {
@@ -64,19 +71,17 @@ int strrindex (const char src[], const char pattern[])
             j = next[j];
         }
     }
-
     return start;
 }
 
-void compute_next (const char src[], int next[])
+void compute_next(const char src[], int next[])
 {
     next[0] = -1;
     if (src[0] == '\0') {
         return;
     }
     
-    // `i' marks the index of the current character in `src'. If x = next[i],
-    // then it means string src[0 ... (x - 1)] == src[(i - x) ... (i - 1)].
+    // next[i] = x means src[0 ... (x-1)] == src[(i-x) ... (i-1)].
     next[1] = 0;
     for (int i = 1; src[i] != '\0'; i++) {
         int j = next[i - 1];

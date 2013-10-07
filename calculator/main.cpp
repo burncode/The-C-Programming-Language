@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
   
     char s[MAXOP];
     char alpha = '\0';
-    int type = ERROR;
+    int type = EOF;
     bool fail = false;
     double op = 0;
     double last_val = 0;
@@ -138,10 +138,8 @@ int main(int argc, char* argv[])
             printf("%16f\n\n", last_val);
             break;
 
-        case ERROR:
-            printf("Unknown token: %s\n", s);
         default:
-            printf("Unknown command: %c\n", type);
+            printf("Unknown token: %c\n", type);
             fail = true;
             break;
         }

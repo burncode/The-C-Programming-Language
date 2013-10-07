@@ -1,73 +1,69 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--06                                                   **
- *                                                                      **
- * File: 4-2.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sat Oct  5 23:58:38 2013
+//
+// File: 4-2.cpp
+// Description: Convert string to double number
 
 
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define BUFSIZE 1024
+double atof(const char s[]);
 
-double atof (const char s[]);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    char line[BUFSIZE];
-  
-    while (my_getline (line, BUFSIZE) >= 0) {
-        printf ("atof (%s): %f\n", line, atof (line));
+    const int MAXLINE = 1024;
+    
+    int len = 0;
+    char line[MAXLINE];
+    while (true) {
+        printf("Input a number(decimal, can be scientific/digit one): ");
+        if ((len = my_getline(line, MAXLINE)) <= 0) {
+            break;
+        }
+        line[len - 1] = '\0';
+        printf("atof(%s): %f\n", line, atof(line));
     }
-
     return 0;
 }
 
-double atof (const char s[])
+double atof(const char s[])
 {
-    int val, power, i, sign, exp;
-
-    for (i = 0; isspace (s[i]); i++) {
+    int i = 0;
+    for (; isspace(s[i]); i++) {
         ;
     }
-
-    sign = (s[i] == '-')? -1: 1;
+    int sign = (s[i] == '-')? -1: 1;
     if (s[i] == '+' || s[i] == '-') {
         i++;
     }
 
-    for (val = 0; isdigit (s[i]); i++) {
+    int val = 0;
+    for (; isdigit(s[i]); i++) {
         val = 10 * val + (s[i] - '0');
     }
-
-    if (s[i] == '.' && isdigit (s[i + 1])) {
+    if (s[i] == '.' && isdigit(s[i + 1])) {
         i++;
     }
 
-    for (power = 0; isdigit (s[i]); i++) {
+    int power = 0;
+    for (; isdigit(s[i]); i++) {
         val = 10 * val + (s[i] - '0');
         power--;
     }
     val *= sign;
-	
-    if (tolower (s[i++]) == 'e') {
+    if (tolower(s[i++]) == 'e') {
         sign = (s[i] == '-')? -1: 1;
         if (s[i] == '+' || s[i] == '-') {
             i++;
         }
-
-        for (exp = 0; isdigit (s[i]); i++) {
+        int exp = 0;
+        for (; isdigit(s[i]); i++) {
             exp = 10 * exp + (s[i] - '0');
         }
         power += sign * exp;
     }
-
-    return val * pow (10.0, power);
+    return val * pow(10.0, power);
 }

@@ -56,9 +56,14 @@ int getop(char s[])
     if (!isdigit(c) && c != '.' && c != '-' && c != '+') {
         return c;
     }
-    // '+' and '-' may be followed by a digit or a '.'. For example, -.123.
-    if ((c == '-' || c == '+') && !isdigit(line[pos]) && line[pos] != '.') {
-        return c;
+    if (c == '-' || c == '+') {
+        // '+' and '-' may be followed by a digit or a '.'.
+        if (isdigit(line[pos]) || (line[pos] == '.' 
+                                   && isdigit(line[pos + 1]))) {
+            // Case such as +.123 or +123.
+        } else {
+            return c;
+        }
     }
     // '.' should be followed by a digit to be a pure digit number.
     if (c == '.' && !isdigit(line[pos])) {
@@ -71,9 +76,10 @@ int getop(char s[])
 
     if (c == '.') {
         if (!isdigit(line[pos])) {
-            // Cases such as 123.abc
-            s[i] = '\0';
-            return ERROR;
+            // Case such as 123.abc.
+            pos--;
+            s[i - 1] = '\0';
+            return NUMBER;
         }
         do {
             s[i++] = c;

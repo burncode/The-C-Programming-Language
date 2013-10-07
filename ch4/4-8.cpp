@@ -1,65 +1,54 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
- *                                                                      **
- * File: 4-8.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Mon Oct  7 13:29:47 2013
+//
+// File: 4-8.cpp
+// Description: Implement ungetch without stack
+
 
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
 
-#define BUFSIZE 100
+char getch();
+// Overwrite last unget character if exists.
+void ungetch(char c);
 
-char last_c = 0;
-
-char getch_c ();
-void ungetch_c (char c);
-
-int main ()
+int main(int argc, char* argv[])
 {
-    srand (time (NULL));
+    srand(time(NULL));
 
-    char c;
-    bool buffed;
-
-    buffed = false;
-    while ((c = getch_c ()) != EOF) {
+    char c = '\0';
+    bool buffed = false;
+    while ((c = getch()) != EOF) {
         if (buffed) {
+            putchar(c);
             buffed = false;
-            putchar (c);
-
         } else {
-            if (rand () % 100 < 30) {
-                ungetch_c (c);
+            if (rand() % 100 < 30) {
+                ungetch(c);
                 buffed = true;
             } else {
-                putchar (c);
+                putchar(c);
             }
         }
     }
-    
     return 0;
 }
 
-char getch_c () 
+static int last = EOF;
+
+char getch() 
 {
-    char ret = (last_c != 0)? last_c: getchar();
-    last_c = 0;
+    char ret = (last == EOF)? getchar(): last;
+    last = EOF;
     return ret;
 }
 
-void ungetch_c (char c)
+void ungetch(char c)
 {
-    if (last_c != 0) {
-        printf ("Overwrite last ungetch_c character: %c\n", 
-                last_c);
+    if (last != EOF) {
+        printf("Overwrite last unget character: %c\n", last);
     } 
-    
-    last_c = c;
+    last = c;
 }
