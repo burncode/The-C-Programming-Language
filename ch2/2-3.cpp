@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
     int len = 0;
     int result = 0;
     while (true) {
-        printf("Inpute a hexadecimal: ");
+        printf("Input a hexadecimal: ");
         if ((len = my_getline(line, MAXLINE)) <= 0) {
             break;
         }

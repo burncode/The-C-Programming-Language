@@ -1,59 +1,50 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
- *                                                                      **
- * File: getop.cpp                                                      **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct  6 13:22:21 2013
+//
+// File: getop.cpp
+// Description: Get the next token from stdin
 
 
-#include <ctype.h>
 #include <stdio.h>
-#include <string.h>
+#include <ctype.h>
+#include "utils/utils.h"
 #include "calc.h"
 
-#define MAXLINE 1024
-
-int getop (char s[])
+int getop(char s[])
 {
+    static const int MAXLINE = 1024;
     static char line[MAXLINE];
     static int pos = 0;
 
-    int i, c;
-
     if (line[pos] == '\0') {
-        if (my_getline (line, MAXLINE) <= 0) {
-            return EOF;
-        } else {
+        if (my_getline(line, MAXLINE) > 0) {
             pos = 0;
+        } else {
+            return EOF;
         }
     }	       
 
-    i = 0;
+    int i = 0;
     s[i] = '\0';
 
+    int c = -1;
     do {
         c = line[pos++];
     } while (c == ' ' || c == '\t');
 
-    if (isalpha (c)) {
+    if (isalpha(c)) {
         // Mathematic commands or single character.
         do {
             s[i++] = c;
             c = line[pos++];
-        } while (isalpha (c));
-
-        // unget a character.
+        } while (isalpha(c));
         pos--;
         s[i] = '\0';
 
         if (i > 1) {
             return MATH;
         } else {
-            if (isupper (s[0])) {
+            if (isupper(s[0])) {
                 return ALPHA;
             } else {
                 return s[0];
@@ -61,52 +52,34 @@ int getop (char s[])
         }
     }
 
-    // These characters can be the leading character of a number.     
-    if (!isdigit (c) && c != '.' 
-        && c != '-' && c != '+') {
+    // Notice characters that can be the leading character of a number.     
+    if (!isdigit(c) && c != '.' && c != '-' && c != '+') {
         return c;
     }
-   
-    // '+' and '-' should be followed by a digit to be a number
-    // or be followed by a '.'. For example, -.123.
-    if ((c == '-' || c == '+')
-        && !isdigit (line[pos])
-        && line[pos] != '.') {
+    // '+' and '-' may be followed by a digit or a '.'. For example, -.123.
+    if ((c == '-' || c == '+') && !isdigit(line[pos]) && line[pos] != '.') {
         return c;
     }
-
     // '.' should be followed by a digit to be a pure digit number.
-    if (c == '.' && !isdigit (line[pos])) {
+    if (c == '.' && !isdigit(line[pos])) {
         return c;
     }
-
     do {
         s[i++] = c;
         c = line[pos++];
-    } while (isdigit (c));
-     
+    } while (isdigit(c));
+
     if (c == '.') {
-        // '.' should be followed by a digit to be a digit number.
-        if (!isdigit (line[pos])) {
-            // Unget the '.'.
-            pos--;
+        if (!isdigit(line[pos])) {
+            // Cases such as 123.abc
             s[i] = '\0';
-
-            if (!isdigit (s[0]) && i <= 1) {
-                // Case such as +.abc.
-                return s[0];
-            } else {
-                // Case such as -123..
-                return NUMBER;
-            }
+            return ERROR;
         }
-
         do {
             s[i++] = c;
             c = line[pos++];
-        } while (isdigit (c));
+        } while (isdigit(c));
     }
-
     s[i] = '\0';
     pos--;
     return NUMBER;

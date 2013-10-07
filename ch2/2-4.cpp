@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
         if (my_getline(line, MAXLINE) <= 0) {
             break;
         }
-        printf("Inpute filter patter: ");
+        printf("Input filter patter: ");
         if (my_getline(pattern, MAXLINE) <= 0) {
             break;
         }

@@ -1,46 +1,31 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
- *                                                                      **
- * File: calc.h                                                         **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct  6 13:25:03 2013
+//
+// File: calc.h
+// Description: Global declarations
 
+#ifndef CALCULATOR_CALC_H_
+#define CALCULATOR_CALC_H_
 
-#ifndef _CALC_H_
-#define _CALC_H_
-
-#define NUMBER '0'
-#define ALPHA 'A'
-#define MATH 'm'
-#define VAL 'v'
+// Constants to distinguish tokens
+const int NUMBER = '0';
+const int ALPHA = 'A';
+const int MATH = 'm';
+const int VAL = 'v';
+const int ERROR = 'e';
 
 // stack.cpp
-void push (double f);
-double pop ();
-double top ();
-void dup ();
-void swap ();
-void clear ();
+void push(double f, char c = '\0');
+double pop();
+double top();
+char top_alpha();
+void dup();
+void swap();
+bool empty();
+void clear();
 
 // getop.cpp
-int getop (char s[]);
+int getop(char s[]);
 
-
-
-// utils.cpp
-
-// Note that `s' contains '\n' and this function
-// returns the number of characters including '\n'.
-int my_getline (char s[], int lim);
-
-void do_math_func (const char s[]);
-
-
-#endif // _CALC_H_
-
-
+#endif // CALCULATOR_CALC_H_
 
