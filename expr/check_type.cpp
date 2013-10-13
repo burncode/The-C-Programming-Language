@@ -1,13 +1,8 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--07--01                                                   **
- *                                                                      **
- * File: check_type.cpp                                                 **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct 13 15:19:44 2013
+//
+// File: check_type.cpp
+// Description: Determine which kind of token the input is
 
 
 #include <ctype.h>
@@ -15,60 +10,39 @@
 #include <string.h>
 #include "expr.h"
 
-int check_type (const char s[])
+int check_type(const char s[])
 {
-    int i;
-    char c;
+    int i = 0;
+    char c = s[i];
 
-    i = 0;
-    c = s[i];
-    
-    if (isalpha (c)) {
-        while (isalpha (s[++i])) {
-            ;
-        }
-
-        if (s[i] == '\0') {
-            return (i > 1? MATH: c);
-        } else {
-            return UNKNOWN;
-        }
+    // Notice characters that can be the leading character of a number.     
+    if (!isdigit(c) && c != '.' && c != '-' && c != '+') {
+        return (s[i + 1] == '\0'? c: ERROR);
+    }
+    if (c == '-' || c == '+') {
+        c = s[++i];
     }
 
-    // These characters can be the leading character of a number.     
-    if (!isdigit (c) && c != '.' 
-        && c != '-' && c != '+') {
-        return (s[i + 1] == '\0'? c: UNKNOWN);
-    }
-   
-    // '+' and '-' should be followed by a digit to be a number
-    // or be followed by a '.'. For example, -.123.
-    if ((c == '-' || c == '+')
-        && !isdigit (s[i + 1])
-        && s[i + 1] != '.') {
-        return (s[i + 1] == '\0'? c: UNKNOWN);
-    }
-  
-    // Ugly stuff, unget '.' which will be handled later.
+    while (isdigit(c)) {
+        c = s[++i];
+    }     
     if (c == '.') {
-        i--;
+        if (!isdigit(s[i + 1])) {
+            // Cases such as .abc or -.abc or 123.abc.
+            return ERROR;
+        }
+        do {
+            c = s[++i];
+        } while (isdigit(c));
     }
     
-    while (isdigit (s[++i])) {
-        ;
-    }
-     
-    if (s[i] == '.') {
-        // '.' should be followed by a digit to be a digit number.
-        if (!isdigit (s[i + 1])) {
-            return UNKNOWN;
-        }
-
-        while (isdigit (s[++i])) {
-            ;
+    if (c == '\0') {
+        if (isdigit(s[i - 1])) {
+            return NUMBER;
+        } else if (i == 1) {
+            return s[0];
         }
     }
-
-    return (s[i] == '\0'? NUMBER: UNKNOWN);
+    return ERROR;
 }
 

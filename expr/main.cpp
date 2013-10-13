@@ -1,140 +1,89 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
- *                                                                      **
- * File: main.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct 13 20:48:34 2013
+//
+// File: main.cpp
+// Description: A simple reverse Polish expression processor
+
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stdlib.h>             // atof
 #include <math.h>
 #include "expr.h"
 
-#define MAXOP 100
+void print_usage();
 
-void print_help ();
-void do_math_func (const char s[]);
-
-int main (int argc, char* argv[])
+int main(int argc, char* argv[])
 {
-    int type;
-    double op2;
-
     if (argc <= 1) {
-        print_help ();
+        print_usage();
         return -1;
     }
 
+    double op = 0;
     while (--argc > 0) {
-        type = check_type (*++argv);
+        int type = check_type (*++argv);
         switch (type) {
         case NUMBER:
-            push (atof (*argv));
+            push(atof (*argv));
             break;
 
         case '+':
-            push (pop () + pop ());
+            push(pop() + pop());
             break;
-
         case '*':
-            push (pop () * pop ());
+            push(pop() * pop());
             break;
-
         case '-':
-            op2 = pop ();
-            push (pop () - op2);
+            op = pop();
+            push(pop() - op);
             break;
-
         case '%':
-            op2 = pop ();
-            if (op2 == 0.0) {
-                printf ("Zero divisor\n");
+            op = pop();
+            if (op == 0.0) {
+                printf("Zero divisor\n");
             } else {
-                push (fmod (pop (), op2));
+                push(fmod(pop(), op));
             }
             break;
-
         case '/':
-            op2 = pop();
-            if (op2 == 0.0) {
-                printf ("Zero divisor\n");
+            op = pop();
+            if (op == 0.0) {
+                printf("Zero divisor\n");
             } else {
-                push (pop() / op2);
+                push(pop() / op);
             }
             break;
-
-        case MATH:
-            do_math_func (*argv);
-            break;
-
         case '^':
-            op2 = pop ();
-            push (pow (pop (), op2));
+            op = pop();
+            push(pow (pop(), op));
             break;
 
-        case 't':
-            printf ("Top of stack: %f\n", top ());
-            break;
-            
-        case 'd':
-            dup ();
-            break;
-
-        case 's':
-            swap ();
-            break;
-
-        case 'c':
-            clear ();
-            break;
-            
-        case UNKNOWN:
-            printf ("Unkonw token: %s\n\n", *argv);
-            print_help ();
+        case ERROR:
+            printf("Wrong format of token: %s\n", *argv);
+            print_usage();
             return -1;
-
         default:
-            printf ("Unknown command: %c\n\n", type);
-            print_help ();
+            printf("Unknown token: %c\n\n", type);
+            print_usage();
             return -1;
         }
     }
     
-    printf ("%f\n", pop ());
-
+    op = pop();
+    if (!empty()) {
+        printf("Stack is not emtpy, bad expression\n");
+        print_usage();
+        return -1;
+    }
+    printf("Result is: %f\n", op);
     return 0;
 }
 
-void print_help ()
+void print_usage()
 {
-    printf ("Usage: expr token1 token2 ... .\n\n");
+    printf("Usage: expr token1 token2 ... .\n\n");
 
-    printf ("This is a reverse Polish caculator. Support digit numbers and\n"
-            "negative numbers. Note that spaces are needed to separate tokens.\n\n");
-
-    printf ("Arithmetic commands: \'+\', \'-\', \'*\', \'/\', \'%%\', \'^\'.\n"
-            "Mathemetic commands: \'sin\', \'cos\', \'exp\'.\n"
-            "Stack commands:\n"
-            "\t\'t\' for printing the top element of the stack.\n"
-            "\t\'d\' for duplicating the top element of the stack.\n"
-            "\t\'s\' for swapping the top 2 element of the stack.\n"
-            "\t\'c\' for clearing the stack.\n\n");
-}
-
-void do_math_func (const char s[])
-{
-    if (strcmp (s, "sin") == 0) {
-        push (sin (pop ()));
-    } else if (strcmp (s, "cos") == 0) {
-        push (cos (pop ()));
-    } else if (strcmp (s, "exp") == 0) {
-        push (exp (pop ()));
-    } else {
-        printf ("Unknown mathematic command: %s\n", s);
-    }
+    printf("This is a reverse Polish expression processor. Support digit numbers\n"
+            "and negative numbers. Note that spaces are needed to separate tokens.\n"
+            "Arithmetic commands: \'+\', \'-\', \'*\', \'/\', \'%%\', \'^\'.\n\n");
 }

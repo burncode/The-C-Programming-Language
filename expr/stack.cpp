@@ -1,42 +1,38 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
- *                                                                      **
- * File: stack.cpp                                                      **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct 13 15:18:24 2013
+//
+// File: stack.cpp
+// Description: Stack operations
+
 
 #include <stdio.h>
 #include "expr.h"
 
-#define MAXVAL 100
+static const int MAXVAL = 100;
 
 static int sp = 0;
 static double val[MAXVAL];
 
-void push (double f)
+void push(double f)
 {
     if (sp < MAXVAL) {
         val[sp++] = f;
     } else {
-        printf ("Stack is full, can't push %g\n", f);
+        printf("Stack is full, can't push %g\n", f);
     }
 }
 
-double pop ()
+double pop()
 {
     if (sp > 0) {
         return val[--sp];
     } else {
-        printf ("Stack is empty\n");
+        printf("Stack is empty\n");
         return 0.0;
     }
 }
 
-double top ()
+double top()
 {
     if (sp > 0) {
         return val[sp - 1];
@@ -46,27 +42,8 @@ double top ()
     }
 }
 
-void dup ()
-{
-    if (sp > 0) {
-        push (top ());
-    } else {
-        printf ("Stack is empty\n");
-    }
-}
-
-void swap ()
-{
-    double f1, f2;
-    if (sp > 1) {
-        f1 = val[sp - 1];
-        f2 = val[sp - 2];
-        val[sp - 1] = f2;
-        val[sp - 2] = f1;
-    } else {
-        printf ("Not enough elements for swapping\n");
-    }
-}
+bool empty()
+{ return sp == 0; }
 
 void clear()
 { sp = 0; }

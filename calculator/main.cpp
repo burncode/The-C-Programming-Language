@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
     const int MAXOP = 1024;
 
     printf("-------------Welcome to Simple Caculator!--------------\n"
-           "This caculator uses reverse Polish notation. Support digit\n"
+           "This caculator uses reverse Polish expression. Support digit\n"
            "numbers and negative numbers. Note that spaces are needed\n"
            "to separate elements.\n\n");
     printf("Arithmetic commands: \'+\', \'-\', \'*\', \'/\', \'%%\', \'^\'.\n"

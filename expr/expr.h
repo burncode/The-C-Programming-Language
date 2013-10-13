@@ -1,35 +1,25 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--16                                                   **
- *                                                                      **
- * File: expr.h                                                         **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct 13 15:15:28 2013
+//
+// File: expr.h
+// Description: Global declarations
 
+#ifndef EXPR_EXPR_H_
+#define EXPR_EXPR_H_
 
-#ifndef _EXPR_H_
-#define _EXPR_H_
-
-#define NUMBER '0'
-#define MATH 'm'
-#define UNKNOWN '\0'
+// Constants to distinguish tokens
+const int NUMBER = '0';
+const int MATH = 'm';
+const int ERROR = 'e';
 
 // stack.cpp
-void push (double f);
-double pop ();
-double top ();
-void dup ();
-void swap ();
-void clear ();
+void push(double f);
+double pop();
+double top();
+bool empty();
+void clear();
 
 // check_type.cpp
-int check_type (const char s[]);
+int check_type(const char s[]);
 
-
-#endif // _EXPR_H_
-
-
-
+#endif // EXPR_EXPR_H_
