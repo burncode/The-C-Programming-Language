@@ -40,7 +40,7 @@ double atof(const char s[])
         i++;
     }
 
-    int val = 0;
+    double val = 0;
     for (; isdigit(s[i]); i++) {
         val = 10 * val + (s[i] - '0');
     }

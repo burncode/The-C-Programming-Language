@@ -44,11 +44,7 @@ int getop(char s[])
         if (i > 1) {
             return MATH;
         } else {
-            if (isupper(s[0])) {
-                return ALPHA;
-            } else {
-                return s[0];
-            }
+            return (isupper(s[0])? ALPHA: s[0]);
         }
     }
 
@@ -57,37 +53,30 @@ int getop(char s[])
         return c;
     }
     if (c == '-' || c == '+') {
-        // '+' and '-' may be followed by a digit or a '.'.
-        if (isdigit(line[pos]) || (line[pos] == '.' 
-                                   && isdigit(line[pos + 1]))) {
-            // Case such as +.123 or +123.
-        } else {
-            return c;
-        }
-    }
-    // '.' should be followed by a digit to be a pure digit number.
-    if (c == '.' && !isdigit(line[pos])) {
-        return c;
-    }
-    do {
         s[i++] = c;
         c = line[pos++];
-    } while (isdigit(c));
+    }
 
+    bool has_number = false;
+    while (isdigit(c)) {
+        s[i++] = c;
+        c = line[pos++];
+        has_number = true;
+    }
     if (c == '.') {
         if (!isdigit(line[pos])) {
-            // Case such as 123.abc.
-            pos--;
-            s[i - 1] = '\0';
-            return NUMBER;
+            // Cases such as .abc or -.abc or 123.abc.
+            pos -= (has_number? 1: i);
+            s[i] = '\0';
+            return (has_number? NUMBER: (i > 0? s[0]: c));
         }
         do {
             s[i++] = c;
             c = line[pos++];
+            has_number = true;
         } while (isdigit(c));
     }
-    s[i] = '\0';
     pos--;
-    return NUMBER;
+    s[i] = '\0';
+    return (has_number? NUMBER: s[0]);
 }
-

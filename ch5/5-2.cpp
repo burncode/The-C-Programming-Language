@@ -45,6 +45,15 @@ int getfloat(float* pf)
     }
     int sign = (c == '-')? -1: 1;
 
+    // '.' should be followed by a digit to be a pure digit number.
+    if (c == '.') {
+        int c2 = getchar();
+        ungetc(c2, stdin);
+        if (!isdigit(c2)) {
+            ungetc(c, stdin);
+            return 0;
+        }
+    }
     if ((c == '-' || c == '+')) {
         // '+' and '-' may be followed by a digit or a '.'.
         int c2 = getchar();
@@ -63,16 +72,6 @@ int getfloat(float* pf)
             }
         } else {
             ungetc(c2, stdin);
-            ungetc(c, stdin);
-            return 0;
-        }
-    }
-
-    // '.' should be followed by a digit to be a pure digit number.
-    if (c == '.') {
-        int c2 = getchar();
-        ungetc(c2, stdin);
-        if (!isdigit(c2)) {
             ungetc(c, stdin);
             return 0;
         }

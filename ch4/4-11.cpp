@@ -47,11 +47,11 @@ int getop(char s[])
     if (!isdigit(c) && c != '.') {
         return c;
     }
-    do {
+
+    while (isdigit(c)) {
         s[i++] = c;
         c = getchar();
-    } while (isdigit(c));
-
+    }
     if (c == '.') {
         // May introduce a bug when input is 123.abc. If so,
         // s[] will be `123.' and return value is `NUMBER'.
@@ -62,6 +62,6 @@ int getop(char s[])
     }
     s[i] = '\0';
     last_c =  c;
-    return NUMBER;
+    return (isdigit(s[i - 1])? NUMBER: s[0]);
 }
 
