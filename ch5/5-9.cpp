@@ -1,120 +1,93 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--22                                                   **
- *                                                                      **
- * File: 5-9.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct 13 13:27:54 2013
+//
+// File: 5-9.cpp
+// Description: Convert between dates and days using pointers to access array.
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-char daytab[2][13] = {
-    {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
-    {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}, 
-};
+// Both function will validate the parameter. Return -1 on error.
+int day_of_year(int year, int month, int day);
+int month_day(int year, int yearday, int* pmonth, int* pday);
 
-int day_of_year (int year, int month, int day);
-int month_day (int year, int yearday, 
-               int* pmonth, int* pday);
-
-int main()
+int main(int argc, char* argv[])
 {
-    srand (time (NULL));
+    srand(time(NULL));
 
-    int year, month, day, yearday, ret;
+    int month = 0;
+    int day = 0;
+    printf("month_day(1900, 366): %d\n", 
+           month_day(1900, 366, &month, &day));    
+    printf("month_day(2000, 366): %d. ",
+           month_day(2000, 366, &month, &day));
+    printf("It's %02d/%02d\n\n", month, day);
 
-    printf ("month_day (1900, 366): ");
-    month_day (1900, 366, &month, &day);
-    month_day (2000, 366, &month, &day);
-    printf ("month_day (2000, 366): %02d/%02d\n\n", 
-            month, day);
-
-    printf ("day_of_year (1900, 2, 29): ");
-    day_of_year (1900, 2, 29);
-    printf ("day_of_year (2000, 3, 1): %d\n", 
-            day_of_year (2000, 3, 1));
-
-    printf ("\n********************************"
-            "*******************************\n\n");
+    printf("day_of_year(1900, 2, 29): %d\n", day_of_year(1900, 2, 29));
+    printf("day_of_year(2000, 3, 1): %d\n\n\n", day_of_year(2000, 3, 1));
 
     for (int i = 0; i < 10; ++i) {
-        year = rand () % 101 + 1900;
-        yearday = rand () % 400;
-
-        printf ("month_day (%d, %d): ", 
-                year, yearday);
-        ret = month_day (year, yearday, &month, &day);
+        int year = rand() % 101 + 1900;
+        int yearday = rand() % 400;
+        printf("month_day(%d, %d): ", year, yearday);
+        int ret = month_day(year, yearday, &month, &day);
         if (ret == 0) {
-            printf ("%02d/%02d\n", month, day);
-            printf ("day_of_year (%d, %d, %d): %d\n", 
+            printf("%02d/%02d\n", month, day);
+            printf("day_of_year(%d, %d, %d): %d\n", 
                     year, month, day, 
-                    day_of_year (year, month, day));
+                    day_of_year(year, month, day));
         }
-
-        printf ("\n");
+        printf("\n");
     }    
 
     return 0;
 }
 
-int day_of_year (int year, int month, int day)
+
+const char daytab[2][13] = {
+    {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+    {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}, 
+};
+
+int day_of_year(int year, int month, int day)
 {
-    int i, leap;
-
     if (month <= 0 || month > 12) {
-        printf ("Incorrect month number: %d\n", 
-                month);
+        printf("Invalid month: %d\n", month);
         return -1;
     }
-
-    leap = (year % 4 == 0 && year % 100 != 0)
-        || (year % 400 == 0);
-
+    
+    int leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     if (day > *(*(daytab + leap) + month)) {
-        printf ("Incorrect day number: %d\n", 
-                day);
+        printf("Invalid day: %d\n", day);
         return -1;
     }
-
-    for (i = 1; i < month; i++) {
-        day += *(*(daytab + leap) + i);
+    int days = day;
+    for (int i = 1; i < month; i++) {
+        days += *(*(daytab + leap) + i);
     }
-
-    return day;
+    return days;
 }
 
-int month_day (int year, int yearday, 
-               int* pmonth, int* pday)
+int month_day(int year, int yearday, int* pmonth, int* pday)
 {
-    int i, leap, day;
-
     if (yearday <= 0) {
-        printf ("Incorrect yearday number: %d", 
-                yearday);
+        printf("Invalid yearday: %d\n", yearday);
         return -1;
     }
 
-    leap = (year % 4 == 0 && year % 100 != 0) 
-        || (year % 400 == 0);
-
-    day = yearday;
-    for (i = 1; day > *(*(daytab + leap) + i) 
-         && i <= 12; i++) {
-        day -= *(*(daytab + leap) + i);
+    int leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    int day = yearday;
+    int month = 1;
+    for (; day > *(*(daytab + leap) + month) && month <= 12; month++) {
+        day -= *(*(daytab + leap) + month);
     }
-
-    if (i > 12) {
-        printf ("Incorrect yearday number: %d\n", 
-                yearday);
+    if (month > 12) {
+        printf("Invalid yearday: %d\n", yearday);
         return -1;
     }
-
-    *pmonth = i;
+    *pmonth = month;
     *pday = day;
     return 0;
 }

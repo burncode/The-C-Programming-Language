@@ -1,7 +1,0 @@
-;; Object Solutions
-;; EDE Project Files are auto generated: Do Not Edit
-(ede-proj-project "Solutions"
-  :file "Project.ede"
-  :name "Solutions"
-  :targets 'nil
-  )

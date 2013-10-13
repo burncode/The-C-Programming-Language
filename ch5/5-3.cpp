@@ -1,39 +1,44 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--22                                                   **
- *                                                                      **
- * File: 5-3.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct 13 11:52:54 2013
+//
+// File: 5-3.cpp
+// Description: Implementation of strcat 
+
 
 #include <string.h>
 #include <stdio.h>
-#include "utils.h"
+#include "utils/utils.h"
 
-#define MAXSIZE 1024
+void my_strcat(char* s, const char* t);
 
-void my_strcat (char* s, const char* t);
-
-int main ()
+int main(int argc, char* argv[])
 {
+    const int MAXSIZE = 1024;
+
+    int len = 0;
     char line1[MAXSIZE];
     char line2[MAXSIZE];
-
-    while (my_getline (line1, MAXSIZE) >= 0
-           && my_getline (line2, MAXSIZE) >= 0) {
-        my_strcat (line1, line2);
-        printf ("After strcat: %s\n\n", line1);
+    while (true) {
+        printf("Input destination string: ");
+        if ((len = my_getline(line1, MAXSIZE)) <= 0) {
+            break;
+        }
+        line1[len - 1] = '\0';
+        printf("Input source string: ");
+        if ((len = my_getline(line2, MAXSIZE)) <= 0) {
+            break;
+        }
+        line2[len - 1] = '\0';
+        my_strcat(line1, line2);
+        printf("After strcat(dest, src): %s\n\n", line1);
     }
 
     return 0;
 }
 
-void my_strcat (char* s, const char* t)
+void my_strcat(char* s, const char* t)
 {
-    s += strlen (s);
+    s += strlen(s);
     while (*s++ = *t++) {
         ;
     }

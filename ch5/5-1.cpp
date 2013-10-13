@@ -1,68 +1,64 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--06--20                                                   **
- *                                                                      **
- * File: 5-1.cpp                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct 13 09:49:27 2013
+//
+// File: 5-1.cpp
+// Description: Get an integer from standard input
+
 
 #include <ctype.h>
 #include <stdio.h>
-#include "utils.h"
 
-int getint (int* pn);
+// Returns 0 if it's not an integer. Otherwise returns the next character
+// right after the integer, and this character will be pushed back to
+// standard input.
+int getint(int* pn);
 
-int main ()
+int main(int argc, char* argv[])
 {
-    int val, count, ret, c;
-
-    count = 0;
+    int ret = 0;
+    int val = 0;
+    int count = 0;
     do {
-        ret = getint (&val);
+        ret = getint(&val);
         if (ret > 0) {
             count++;
-            printf ("val%d = %d\n", count, val);
+            printf("val%d = %d\n", count, val);
         } else {
-            c = getch ();
+            ret = getchar();
         }
-    } while (c != EOF);
+    } while (ret != EOF);
+
+    return 0;
 }
 
-int getint (int* pn)
+int getint(int* pn)
 {
-    int c, c2, sign;
-
-    while (isspace (c = getch ())) {
+    int c = EOF;
+    while (isspace(c = getchar())) {
         ;
     }
 
     // These characters can be the leading character of a number.
-    if (!isdigit (c) && c != '+' && c != '-') {
-        ungetch (c);
+    if (!isdigit(c) && c != '+' && c != '-') {
+        ungetc(c, stdin);
         return 0;
     }
-
-    sign = (c == '-')? -1: 1;
-
+    int sign = (c == '-')? -1: 1;
     if (c == '-' || c == '+') {
-        c2 = getch ();
-        if (!isdigit (c2)) {
-            ungetch (c2);
-            ungetch (c);
+        int c2 = getchar();
+        if (!isdigit(c2)) {
+            ungetc(c2, stdin);
+            ungetc(c, stdin);
             return 0;
         } else {
             c = c2;
         }
     }
 
-    for (*pn = 0; isdigit (c); c = getch ()) {
+    for (*pn = 0; isdigit(c); c = getchar()) {
         *pn = 10 * *pn + (c - '0');
     }
     *pn *= sign;
-	
-    ungetch (c);
+    ungetc(c, stdin);
     return c;
 }
