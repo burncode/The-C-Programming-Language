@@ -1,45 +1,19 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--07--18                                                   **
- *                                                                      **
- * File: tail.h                                                         **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Mon Oct 14 23:07:35 2013
+//
+// File: tail.h
+// Description: Global declarations
 
 
-#ifndef _TAIL_H_
-#define _TAIL_H_
+#ifndef TAIL_TAIL_H_
+#define TAIL_TAIL_H_
 
-#define NUMBER '-'
-#define UNKNOWN '\0'
+enum Option {
+    NUMBER = 0,
+    ERROR = 1,
+};
 
-// utils.cpp
+// getopt.cpp
+Option my_getopt(const char* arg, char* s);
 
-// Note that s contains '\n' and this function returns the number
-// of characters including '\n'.
-int my_getline (char s[], int lim);
-
-void print_help ();
-
-
-// char_pool.cpp
-
-// Add chunk `ptr' to free list. Note that the free list is ordered
-// by address of each chunk and chunks can merge into bigger one
-// if they are contiguous.
-void free_mem (void* ptr);
-
-// Return a pointer the a memory chunk in this pool. This function
-// will check free list first.
-void* alloc_mem (int size);
-
-
-
-// getop.cpp
-int getop (const char* arg, char* s);
-
-
-#endif // _TAIL_H_
+#endif // TAIL_TAIL_H_
