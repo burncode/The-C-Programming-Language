@@ -18,8 +18,8 @@ int main(int argc, char* argv[])
 void detab(int tab_offset) 
 {
     // `next' marks the next tab position, which is a multiple of `tab_offset'.
-    // Note that position `next' cannot hold any character, input after
-    // `next' position starts from `next + 1'.
+    // Note that position `next' cannot hold any character, input after `next'
+    // position starts from `next + 1'.
     int next = -1;
     int c = -1;
 

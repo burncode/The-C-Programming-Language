@@ -1,38 +1,25 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--07--22                                                   **
- *                                                                      **
- * File: detab.h                                                        **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Sun Oct 13 21:08:07 2013
+//
+// File: detab.h
+// Description: Global declarations
 
 
-#ifndef _DETAB_H_
-#define _DETAB_H_
+#ifndef DETAB_DETAB_H_
+#define DETAB_DETAB_H_
 
-#define MAXSIZE 200
+enum Option {
+    NUMBER = 0,
+    BEGIN = 1,
+    INC = 2,
+    ERROR = 3,
+};
 
-#define NUMBER '0'
-#define BEGIN '-'
-#define INC '+'
-#define UNKNOWN '\0'
-
-#define YES 1
-#define NO 0
-
-
-// getop.cpp
-int getop (const char* arg, char* s);
-
-// utils.cpp
-int find_next_stop (int i, const char tab_flags[]);
-void print_help ();
+// getopt.cpp
+Option my_getopt(const char* arg, char* s);
 
 // detab.cpp
-void detab (const char tab_flags[]);
+void detab(const bool tab_flags[], int size);
 
 
-#endif // _DETAB_H_
+#endif // DETAB_DETAB_H_

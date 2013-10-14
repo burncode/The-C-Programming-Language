@@ -1,82 +1,91 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--07--01                                                   **
- *                                                                      **
- * File: main.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Mon Oct 14 21:49:21 2013
+//
+// File: main.cpp
+// Description: Replace blanks with TABs
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h>             // atoi
 #include "entab.h"
 
-#define MAXLINE 1024
+void print_usage();
 
-#define DFTINC 8
-#define DFTBEGIN 0
-
-int main (int argc, char* argv[]) 
+int main(int argc, char* argv[]) 
 {
-    // `tab_flags' marks the position of each tab locates. For example,
-    // if `tab_flags[1~7]' is `NO' and `tab_flags[8]' is `YES', then
-    // a '\t' in position 1~8 will move the cursor directly to 9, which
-    // means the character right after '\t' will appear at postion 9.
-    bool inc_mode, list_mode;
-    int begin, inc, stop, op;
-    char tab_flags[MAXSIZE];
-    char s[MAXLINE];
+    const int MAXLINE = 1024;
+    const int DFTINC = 8;
+    const int DFTBEGIN = 0;
 
-    inc_mode = false;
-    list_mode = false;
-    begin = DFTBEGIN;
-    inc = DFTINC;
+    bool inc_mode = false;
+    bool list_mode = false;
+    int begin = DFTBEGIN;
+    int inc = DFTINC;
+    int stop = 0;
+    char buf[MAXLINE];
 
-    for (int i = 0; i < MAXSIZE; ++i) {
-        tab_flags[i] = NO;
+    // `tab_flags[i]' is true means that a TAB before position `i' will
+    // immediately move the cursor to `i+1'.
+    bool tab_flags[MAXLINE];
+    for (int i = 0; i < MAXLINE; ++i) {
+        tab_flags[i] = false;
     }
 
     while (--argc > 0) {
-        op = getop (*++argv, s);
-
+        Option op = my_getopt(*++argv, buf);
         switch (op) {
         case BEGIN:
-            begin = atoi (s);
+            begin = atoi(buf);
             inc_mode = true;
             break;
 
         case INC:
-            inc = atoi (s);
+            inc = atoi(buf);
             inc_mode = true;
             break;
 
         case NUMBER:
-            stop = atoi (s);
-            tab_flags[stop] = YES;
+            stop = atoi(buf);
+            tab_flags[stop] = true;
             list_mode = true;
             break;
 
-        case UNKNOWN:
+        case ERROR:
+            printf("Wrong format argument: %s\n", *argv);
+            print_usage();
+            return -1;
         default:
-            print_help ();
+            printf("Impossible to reach here!\n");
             return -1;
         }
     }
 
     if (inc_mode && list_mode) {
-        print_help ();
+        print_usage();
         return -1;
     }
-
+    // Uses INC mode by default
     if (!list_mode) {
-        for (int i = begin; i < MAXSIZE; i += inc) {
-            tab_flags[i] = YES;
+        for (int i = begin; i < MAXLINE; i += inc) {
+            tab_flags[i] = true;
         }
     }
 
-    entab (tab_flags);
+    entab(tab_flags, MAXLINE);
     return 0;
+}
+
+void print_usage()
+{
+    printf("Usage: entab [-BEGIN] [+INC].\n"
+           "       entab [STOPs...].\n\n");
+
+    printf("BEGIN marks the first position of \\t. Default value\n"
+           "of BEGIN is 0. INC marks the number of spaces between\n"
+           "every two \\t. Default value of INC is 8.\n\n");
+
+    printf("STOP marks the exact position of a \\t.\n\n");
+
+    printf("Note that these 2 modes above cannot be specified at\n"
+           "the same time.\n");
 }
 
