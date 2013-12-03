@@ -1,58 +1,59 @@
-/*************************************************************************
- *                                                                      **
- * Author: bear         <jrjbear@gmail.com>                             **
- * Date: 2012--11--04                                                   **
- *                                                                      **
- * File: main.cpp                                                       **
- * Description:                                                         **
- *                                                                      **
- *************************************************************************
- */
+// Author: jrjbear@gmail.com
+// Date: Tue Dec  3 13:09:06 2013
+//
+// File: main.cpp
+// Description: Simple grammar parser of C declarations
 
 
 #include <stdio.h>
 #include "dcl.h"
 
-#define MAXSIZE 4096
-
-int main ()
+int main(int argc, char* argv[])
 {
+    const int MAXSIZE = 4096;
     char result[MAXSIZE];
     char token[MAXSIZE];
     int ret, type;
 
-    printf ("------------Welcome to Declaration Parser!--------------\n");
-    printf ("It reads the declarations in C/C++. ';' is required to\n"
-            "separate declarations.\n\n");
+    printf("--------------Welcome to Declaration Parser!--------------\n");
+    printf("This is a simple grammar parser of C declarations. You can\n"
+           "type declarations line by line.\n\n");
 
-    printf ("Note that this parser does not check type, which means\n"
-            "anything appears in that position will be regarded as a\n"
-            "type name. Also we only support one type qualifier: \"const\".\n"
-            "Another restriction is that you will have to give identifier\n"
-            "name in the parameter list of a function declaration.\n\n");
+    printf("Note that this parser doesn't validate the type and only\n"
+           "support one type qualifier: \"const\". Also, you have to give\n"
+           "identifier name inside parameter list of a function declaration.\n\n");
 
-    type = gettoken (token);
-    while (type != EOF) {
-        // Unget this token which was used to test against EOF.
-        unget_token ();
-
-        result[0] = '\0';
-        ret = declaration (result);
-        if (ret < 0) {
-            printf ("Fail to parse declaration, %d errors\n\n", -ret);
+    while (true) {
+        type = gettoken(token);
+        if (type == EOF) {
+            break;
+        } else if (type == '\n') {
+            continue;
         } else {
-            printf ("%s\n\n", result);
+            unget_token();
+            result[0] = '\0';
+            int ret = declaration(result);
+            if (ret < 0) {
+                printf("Fail to parse declaration, %d errors", -ret);
+            } else {
+                printf("%s", result);
+            }
         }
-
+        
         // Error recovery here is simple since we recognize ';' as
         // delimiter which we think "can't be" mistyped.
-        for (type = gettoken (token); 
-             type != ';' && type != EOF; type = gettoken (token)) {
-            dcl_error ("Expected ';' to separate declarations");
+        bool remain = false;
+        for (type = gettoken(token); type != '\n' && type != EOF; 
+             type = gettoken(token)) {
+            if (!remain) {
+                printf("\nThrow away remaining tokens until "
+                       "new line: %s", token);
+                remain = true;
+            } else {
+                printf(", %s", token);
+            }
         }
-
-        // Test whether it is EOF right after ';'.
-        type = gettoken (token);
+        printf("\n\n");
     }
 
     return 0;

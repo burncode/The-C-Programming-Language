@@ -13,24 +13,24 @@
 int getop(char s[])
 {
     static const int MAXLINE = 1024;
-    static char line[MAXLINE];
+    static char line[MAXLINE] = "";
     static int pos = 0;
 
-    if (line[pos] == '\0') {
-        if (my_getline(line, MAXLINE) > 0) {
-            pos = 0;
-        } else {
-            return EOF;
-        }
-    }	       
-
+    int c = line[pos];
     int i = 0;
     s[i] = '\0';
-
-    int c = -1;
     do {
-        c = line[pos++];
-    } while (c == ' ' || c == '\t');
+        if (c == '\0') {
+            pos = 0;
+            if (my_getline(line, MAXLINE) <= 0) {
+                return EOF;
+            }
+        }	
+
+        do {
+            c = line[pos++];
+        } while (c == ' ' || c == '\t');
+    } while (c == '\0');
 
     if (isalpha(c)) {
         // Mathematic commands or single character.

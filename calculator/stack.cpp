@@ -5,7 +5,6 @@
 // Description: Stack operations
 
 #include <stdio.h>
-#include "calc.h"
 
 static const int MAXVAL = 100;
 

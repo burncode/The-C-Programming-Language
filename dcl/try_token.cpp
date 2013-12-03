@@ -10,8 +10,8 @@
 bool try_name(int type)
 { return type == NAME; }
 
-bool try_array_dcl(int type)
-{ return (type == '[' || type == NUMBER); }
+bool try_array(int type)
+{ return (type == ']' || type == NUMBER); }
 
 bool try_right_paran(int type)
 { return type == ')'; }
@@ -45,24 +45,26 @@ bool try_declarator(int type)
 bool try_direct_declarator(int type)
 { return (type == '(' || type == NAME); }
 
-int try_tokens_until(char token[], TryFn expect, 
+int try_tokens_until(int* type, char token[], TryFn expect, 
                      TryFn next_expect, const char* err)
 {
     const int MAXSIZE = 1024;
     char err_buf[MAXSIZE];
-    int type = -1;
+    int ret = 0;
     while (true) {
-        type = gettoken(token);
-        if ((*expect)(type)) {
+        *type = gettoken(token);
+        if ((*expect)(*type)) {
             break;
-        } else if ((*next_expect)(type) || type == EOF || type == '\n') {
+        } else if ((*next_expect)(*type) || *type == EOF || *type == '\n') {
             dcl_error(err);
             unget_token();
+            ret++;
             break;
         } else {
             sprintf(err_buf, "Unknown token: %s", token);
             dcl_error(err_buf);
+            ret++;
         }
     }
-    return type;
+    return ret;
 }
