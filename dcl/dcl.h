@@ -11,7 +11,6 @@
 const int NUMBER = '0';
 const int NAME = 'N';
 const int CONST = 'C';
-const int VAL = 'v';
 
 typedef bool (*TryFn)(int type);
 

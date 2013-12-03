@@ -13,7 +13,6 @@ int main(int argc, char* argv[])
     const int MAXSIZE = 4096;
     char result[MAXSIZE];
     char token[MAXSIZE];
-    int ret, type;
 
     printf("--------------Welcome to Declaration Parser!--------------\n");
     printf("This is a simple grammar parser of C declarations. You can\n"
@@ -21,10 +20,12 @@ int main(int argc, char* argv[])
 
     printf("Note that this parser doesn't validate the type and only\n"
            "support one type qualifier: \"const\". Also, you have to give\n"
-           "identifier name inside parameter list of a function declaration.\n\n");
+           "identifier name of a parameter inside a function declaration.\n"
+           "arrar[] may contain constant number to express size. Other\n"
+           "expressions are not supported.\n\n");
 
     while (true) {
-        type = gettoken(token);
+        int type = gettoken(token);
         if (type == EOF) {
             break;
         } else if (type == '\n') {
@@ -39,9 +40,9 @@ int main(int argc, char* argv[])
                 printf("%s", result);
             }
         }
-        
-        // Error recovery here is simple since we recognize ';' as
-        // delimiter which we think "can't be" mistyped.
+
+        // Skip all the remaining tokens until new line. It's unnecessary
+        // to do error recovery here.
         bool remain = false;
         for (type = gettoken(token); type != '\n' && type != EOF; 
              type = gettoken(token)) {

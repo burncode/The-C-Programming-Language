@@ -1,4 +1,4 @@
-projects := ch1 ch2 ch3 ch4 calculator ch5 expr detab entab tail
+projects := ch1 ch2 ch3 ch4 calculator ch5 expr detab entab tail dcl undcl
 libraries := utils
 
 .PHONY: all $(projects) $(libraries)
