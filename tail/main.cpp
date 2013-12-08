@@ -59,12 +59,6 @@ int main(int argc, char* argv[])
             printf("%s", lines[i]);
         } 
     }
-
-    for (int i = 0; i < nlines; ++i) {
-        if (lines[i]) {
-            free_mem(lines[i]);
-        }
-    }
     return 0;
 }
 

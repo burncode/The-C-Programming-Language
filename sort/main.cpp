@@ -75,7 +75,6 @@ int main(int argc, char* argv[])
     for (int i = 0; i < pos; ++i) {
         int index = (reverse_flag? pos - i - 1: i);
         printf("%s\n",  lines[index]);
-        free_mem(lines[index]);
     }
 
     return 0;
