@@ -9,9 +9,12 @@
 
 int my_getline(char s[], int lim)
 {
+    if (lim <= 1) {
+        return 0;
+    }
+
     int i = 0;
     int c = -1;
-
     // Make sure `i < lim - 1' so as to leave at least one space for '\0'.
     while (i < lim - 1 && c != '\n') {
         c = getchar();
