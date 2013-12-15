@@ -1,4 +1,4 @@
-projects := ch1 ch2 ch3 ch4 calculator ch5 expr detab entab tail dcl undcl ch6
+projects := ch1 ch2 ch3 ch4 calculator ch5 expr detab entab tail dcl undcl ch6 cdefine
 libraries := utils
 
 .PHONY: all $(projects) $(libraries)
