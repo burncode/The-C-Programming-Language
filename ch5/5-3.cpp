@@ -11,8 +11,7 @@
 
 void my_strcat(char* s, const char* t);
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     const int MAXSIZE = 1024;
 
     int len = 0;
@@ -36,10 +35,9 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void my_strcat(char* s, const char* t)
-{
+void my_strcat(char* s, const char* t) {
     s += strlen(s);
-    while (*s++ = *t++) {
+    while ((*s++ = *t++) != '\0') {
         ;
     }
 }
